@@ -18,7 +18,7 @@ class DefaultController extends Controller
     /**
      * @Route("/restartips", name="restartips")
      */
-    public function indexAction()
+    public function restartipsAction()
     {
         return $this->render('default/index.html.twig', array(
             'resultado'      => $resultado,
