@@ -20,7 +20,8 @@ class DefaultController extends Controller
      */
     public function restartipsAction()
     {
-        return $this->render('default/index.html.twig', array(
+        $resultado=shell_exec('shorrewall clear');
+        return $this->render('default/result.html.twig', array(
             'resultado'      => $resultado,
            
         ));
