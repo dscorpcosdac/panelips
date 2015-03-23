@@ -31,7 +31,9 @@ class DefaultController extends Controller
         } else {
             $resultado=$proceder;
         }
-
+         $body=$this->renderView('default/result.html.twig', array(
+           'resultado'      => $proceder.$resultado,               
+            ));
          //echo $proceder.$resultado;
            $res=json_encode(array('funciono' =>true,'elcont'=> $body));
         $response = new Response($res);
@@ -55,7 +57,9 @@ class DefaultController extends Controller
         } else {
             $resultado=$proceder;
         }
-
+        $body=$this->renderView('default/result.html.twig', array(
+           'resultado'      => $proceder.$resultado,               
+            ));
           $res=json_encode(array('funciono' =>true,'elcont'=> $body));
         $response = new Response($res);
         $response->headers->set('Content-Type', 'application/json');
