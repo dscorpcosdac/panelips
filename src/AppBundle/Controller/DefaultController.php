@@ -33,7 +33,7 @@ class DefaultController extends Controller
 
          //echo $proceder.$resultado;
          return $this->render('default/result.html.twig', array(
-           'resultado'      => $proceder.$resultado;,               
+           'resultado'      => $proceder.$resultado,               
             ));
     }
 
@@ -55,7 +55,7 @@ class DefaultController extends Controller
         }
 
         return $this->render('default/result.html.twig', array(
-           'resultado'      => $proceder.$resultado;,               
+           'resultado'      => $proceder.$resultado,               
             ));
     }
 
@@ -76,7 +76,7 @@ class DefaultController extends Controller
         }
 
         return $this->render('default/result.html.twig', array(
-           'resultado'      => $proceder.$resultado;,               
+           'resultado'      => $proceder.$resultado,               
             ));
     }
 
