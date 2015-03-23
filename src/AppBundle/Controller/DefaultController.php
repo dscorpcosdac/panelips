@@ -32,9 +32,10 @@ class DefaultController extends Controller
         }
 
          //echo $proceder.$resultado;
-         return $this->render('default/result.html.twig', array(
-           'resultado'      => $proceder.$resultado,               
-            ));
+           $res=json_encode(array('funciono' =>true,'elcont'=> $body));
+        $response = new Response($res);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
      /**
@@ -54,9 +55,10 @@ class DefaultController extends Controller
             $resultado=$proceder;
         }
 
-        return $this->render('default/result.html.twig', array(
-           'resultado'      => $proceder.$resultado,               
-            ));
+          $res=json_encode(array('funciono' =>true,'elcont'=> $body));
+        $response = new Response($res);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**
@@ -75,9 +77,13 @@ class DefaultController extends Controller
             $resultado=$proceder;
         }
 
-        return $this->render('default/result.html.twig', array(
+        $body=$this->renderView('default/result.html.twig', array(
            'resultado'      => $proceder.$resultado,               
             ));
+         $res=json_encode(array('funciono' =>true,'elcont'=> $body));
+        $response = new Response($res);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
 }
