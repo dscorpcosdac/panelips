@@ -76,8 +76,8 @@ class DefaultController extends Controller
         $proceder=shell_exec('sudo shorewall check');
         $pos = strpos($proceder, 'ERROR');
         if ($pos === false) {
-            $resultado=shell_exec('sudo shorewall restart');
-           // $result2=shell_exec('sudo /usr/sbin/nsm_sensor_ips-start');
+           // $resultado=shell_exec('sudo shorewall restart');
+            $resultado=shell_exec('sudo /usr/sbin/nsm_sensor_ips-restart');
 
         } else {
             $resultado=$proceder;
