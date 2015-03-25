@@ -14,7 +14,24 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+         $archivo = '/etc/shorewall/maclist';
+        $abrir = fopen($archivo,'r+');
+        $contenido = fread($abrir,filesize($archivo));
+        fclose($abrir);
+         
+        // Separar linea por linea
+        $contenido = explode("\n",$contenido);
+        for($i=0;$i<count($contenido);$i++){
+            $datos=explode('  ', $contenido[$i]);
+            if(count($datos)>2){
+                $datos['id']=$i;
+                $todo[]=$datos;
+            }
+
+        }
+        return $this->render('default/index.html.twig', array(
+            'entities' => $todo,
+        ));
     }
 
     /**
@@ -76,8 +93,8 @@ class DefaultController extends Controller
         $proceder=shell_exec('sudo shorewall check');
         $pos = strpos($proceder, 'ERROR');
         if ($pos === false) {
-           // $resultado=shell_exec('sudo shorewall restart');
-            $resultado=shell_exec('sudo /usr/sbin/nsm_sensor_ips-restart');
+            $resultado=shell_exec('sudo shorewall restart');
+           // $resultado=shell_exec('sudo /usr/sbin/nsm_sensor_ips-restart');
 
         } else {
             $resultado=$proceder;
