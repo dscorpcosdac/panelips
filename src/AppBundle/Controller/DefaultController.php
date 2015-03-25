@@ -162,7 +162,7 @@ class DefaultController extends Controller
             $txtMac=$this->get('request')->request->get('txtMac', '');
             $txtIp=$this->get('request')->request->get('txtIp', '');
             $txtInterface=$this->get('request')->request->get('txtInterface', '');
-            $contenido="\n".trim($txtAction)."  ".trim($txtMac)."     ".trim($txtMac)."       ".trim($txtIp)."\n";
+            $contenido=trim($txtAction)."  ".trim($txtInterface)."     ".trim($txtMac)."       ".trim($txtIp)."\n";
         fwrite($file, $contenido . PHP_EOL);
       //  fwrite($file, "Añadimos línea 2" . PHP_EOL);
         fclose($file);
