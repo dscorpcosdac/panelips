@@ -38,7 +38,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once("guiconfig.inc");
+//require_once("guiconfig.inc");
+ini_set('display_errors', -1);
 require_once("/usr/local/pkg/suricata/suricata.inc");
 
 global $g, $config, $rebuild_rules;
