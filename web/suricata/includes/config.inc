@@ -52,7 +52,7 @@
 // Set the memory limit to 128M on i386.  When someone has something like 500+ tunnels
 // the parser needs quite a bit of ram.   Do not remove this line unless you
 // know what you are doing.  If in doubt, check with dev@ _/FIRST/_!
-if(!$ARCH)
+//if(!$ARCH)
 	$ARCH = php_uname("m");
 
 // Set memory limit to 256M on amd64.
@@ -66,10 +66,10 @@ else
 require_once("util.inc");
 require_once("IPv6.inc");*/
 require_once('config.lib.inc');
-if(file_exists("/cf/conf/use_xmlreader"))
+/*if(file_exists("/cf/conf/use_xmlreader"))
 	require_once("xmlreader.inc");
-else
-	require_once("xmlparse.inc");
+else*/
+require_once("xmlparse.inc");
 require_once("crypt.inc");
 
 /* read platform */
