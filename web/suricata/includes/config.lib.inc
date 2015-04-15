@@ -57,8 +57,8 @@ function encrypted_configxml() {
 	if (!file_exists($g['conf_path'] . "/config.xml"))
 		return;
 
-	if (!platform_booting())
-		return;
+	//if (!platform_booting())
+	//	return;
 
 	$configtxt = file_get_contents($g['conf_path'] . "/config.xml");			
 	if(tagfile_deformat($configtxt, $configtxt, "config.xml")) {
