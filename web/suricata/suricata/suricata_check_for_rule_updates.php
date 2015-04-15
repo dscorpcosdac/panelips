@@ -40,8 +40,8 @@
 
 require_once("functions.inc");
 require_once("service-utils.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
-require_once("/usr/local/pkg/suricata/suricata_defs.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata_defs.inc");
 
 global $g, $pkg_interface, $suricata_gui_include, $rebuild_rules;
 

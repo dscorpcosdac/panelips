@@ -39,7 +39,7 @@
  */
 
 require_once("guiconfig.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 $flowbit_rules_file = FLOWBITS_FILENAME;
 $suricatadir = SURICATADIR;

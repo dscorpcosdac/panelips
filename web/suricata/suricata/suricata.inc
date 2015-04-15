@@ -44,7 +44,7 @@ require_once("services.inc");
 require_once("service-utils.inc");
 require_once("pkg-utils.inc");
 require_once("filter.inc");
-require("/usr/local/pkg/suricata/suricata_defs.inc");
+require("/var/www/panelips/web/suricata/suricata/suricata_defs.inc");
 
 global $g, $config;
 
@@ -640,7 +640,7 @@ function suricata_rules_up_install_cron($should_install=true) {
 	}
 
 	// Construct the basic cron command task
-	$command = "/usr/bin/nice -n20 /usr/local/bin/php -f /usr/local/pkg/suricata/suricata_check_for_rule_updates.php";
+	$command = "/usr/bin/nice -n20 /usr/local/bin/php -f /var/www/panelips/web/suricata/suricata/suricata_check_for_rule_updates.php";
 
 	// If there are no changes in the cron job command string from the existing job, then exit
 	if (suricata_cron_job_exists($command, TRUE, $suricata_rules_up_min, $suricata_rules_up_hr, $suricata_rules_up_mday, $suricata_rules_up_month, $suricata_rules_up_wday, "root"))
@@ -662,13 +662,13 @@ function suricata_loglimit_install_cron($should_install=true) {
 	}
 
 	// If there are no changes in the cron job command string from the existing job, then exit.
-	if ($should_install && suricata_cron_job_exists("/usr/local/pkg/suricata/suricata_check_cron_misc.inc", TRUE, "*/5"))
+	if ($should_install && suricata_cron_job_exists("/var/www/panelips/web/suricata/suricata/suricata_check_cron_misc.inc", TRUE, "*/5"))
 		return;
 
 	// Else install the new or updated cron job by removing the
 	// existing job first, then installing the new or updated job.
 	install_cron_job("suricata_check_cron_misc.inc", false);
-	install_cron_job("/usr/bin/nice -n20 /usr/local/bin/php -f /usr/local/pkg/suricata/suricata_check_cron_misc.inc", $should_install, "*/5");
+	install_cron_job("/usr/bin/nice -n20 /usr/local/bin/php -f /var/www/panelips/web/suricata/suricata/suricata_check_cron_misc.inc", $should_install, "*/5");
 }
 
 function suricata_rm_blocked_install_cron($should_install) {
@@ -3218,13 +3218,13 @@ function suricata_generate_yaml($suricatacfg) {
 
 	// Pull in the PHP code that generates the suricata.yaml file
 	// variables that will be substitued further down below.
-	include("/usr/local/pkg/suricata/suricata_generate_yaml.php");
+	include("/var/www/panelips/web/suricata/suricata/suricata_generate_yaml.php");
 
 	// Pull in the boilerplate template for the suricata.yaml
 	// configuration file.  The contents of the template along
 	// with substituted variables are stored in $suricata_conf_text
 	// (which is defined in the included file).
-	include("/usr/local/pkg/suricata/suricata_yaml_template.inc");
+	include("/var/www/panelips/web/suricata/suricata/suricata_yaml_template.inc");
 
 	// Now write out the conf file using $suricata_conf_text contents
 	@file_put_contents("{$suricatacfgdir}/suricata.yaml", $suricata_conf_text); 
@@ -3401,7 +3401,7 @@ function suricata_do_xmlrpc_sync($syncdownloadrules, $sync_to_ip, $port, $userna
 	$downloadrulescmd = "";
 	if ($syncdownloadrules == "yes") {
 		$downloadrulescmd = "log_error(gettext(\"[suricata] XMLRPC pkg CARP sync: Update of downloaded rule sets requested...\"));\n";
-		$downloadrulescmd .= "\tinclude_once(\"/usr/local/pkg/suricata/suricata_check_for_rule_updates.php\");\n";
+		$downloadrulescmd .= "\tinclude_once(\"/var/www/panelips/web/suricata/suricata/suricata_check_for_rule_updates.php\");\n";
 	}
 	$suricatastart = "";
 	if ($syncstartsuricata == "ON") {
@@ -3420,7 +3420,7 @@ function suricata_do_xmlrpc_sync($syncdownloadrules, $sync_to_ip, $port, $userna
 	/*************************************************/
 	$suricata_sync_cmd = <<<EOD
 	<?php
-	require_once("/usr/local/pkg/suricata/suricata.inc");
+	require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 	require_once("service-utils.inc");
 	global \$g, \$rebuild_rules, \$suricata_gui_include, \$pkg_interface;
 	\$orig_pkg_interface = \$pkg_interface;

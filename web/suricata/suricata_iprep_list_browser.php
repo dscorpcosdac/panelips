@@ -1,7 +1,7 @@
 <?php
 
 require_once("guiconfig.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 // Fetch a list of files inside a given directory
 function get_content($dir) {

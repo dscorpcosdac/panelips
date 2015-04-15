@@ -38,7 +38,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
 */
 
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 global $config, $g;
 
@@ -97,7 +97,7 @@ if (!is_subsystem_dirty('mount')) {
 }
 
 /* Remove the Suricata GUI app directories */
-rmdir_recursive("/usr/local/pkg/suricata");
+rmdir_recursive("/var/www/panelips/web/suricata/suricata");
 rmdir_recursive("/usr/local/www/suricata");
 rmdir_recursive("/usr/local/etc/suricata");
 

@@ -52,7 +52,7 @@ POSSIBILITY OF SUCH DAMAGE.
 	<name>suricatasync</name>
 	<version>1.0</version>
 	<title>Suricata: XMLRPC Sync</title>
-	<include_file>/usr/local/pkg/suricata/suricata.inc</include_file>
+	<include_file>/var/www/panelips/web/suricata/suricata/suricata.inc</include_file>
 	<tabs>
 		<tab>
 			<text>Interfaces</text>

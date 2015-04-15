@@ -40,7 +40,7 @@
  */
 
 require_once("guiconfig.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 global $g;
 
@@ -160,12 +160,12 @@ if (!$input_errors) {
 		write_config("Suricata pkg: modified global settings.");
 
 		/* Toggle cron task for GeoIP database updates if setting was changed */
-		if ($config['installedpackages']['suricata']['config'][0]['autogeoipupdate'] == 'on' && !suricata_cron_job_exists("/usr/local/pkg/suricata/suricata_geoipupdate.php")) {
-			include("/usr/local/pkg/suricata/suricata_geoipupdate.php");
-			install_cron_job("/usr/bin/nice -n20 /usr/local/bin/php -f /usr/local/pkg/suricata/suricata_geoipupdate.php", TRUE, 0, 0, 8, "*", "*", "root");
+		if ($config['installedpackages']['suricata']['config'][0]['autogeoipupdate'] == 'on' && !suricata_cron_job_exists("/var/www/panelips/web/suricata/suricata/suricata_geoipupdate.php")) {
+			include("/var/www/panelips/web/suricata/suricata/suricata_geoipupdate.php");
+			install_cron_job("/usr/bin/nice -n20 /usr/local/bin/php -f /var/www/panelips/web/suricata/suricata/suricata_geoipupdate.php", TRUE, 0, 0, 8, "*", "*", "root");
 		}
-		elseif ($config['installedpackages']['suricata']['config'][0]['autogeoipupdate'] == 'off' && suricata_cron_job_exists("/usr/local/pkg/suricata/suricata_geoipupdate.php"))
-			install_cron_job("/usr/local/pkg/suricata/suricata_geoipupdate.php", FALSE);
+		elseif ($config['installedpackages']['suricata']['config'][0]['autogeoipupdate'] == 'off' && suricata_cron_job_exists("/var/www/panelips/web/suricata/suricata/suricata_geoipupdate.php"))
+			install_cron_job("/var/www/panelips/web/suricata/suricata/suricata_geoipupdate.php", FALSE);
 
 		/* create passlist and homenet file, then sync files */
 		conf_mount_rw();

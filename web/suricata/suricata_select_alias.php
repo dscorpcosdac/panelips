@@ -29,7 +29,7 @@
 
 require("guiconfig.inc");
 require_once("functions.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 // Need to keep track of who called us so we can return to the correct page
 // when the SAVE button is clicked.  On initial entry, a GET variable is 

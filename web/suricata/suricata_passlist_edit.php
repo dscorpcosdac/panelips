@@ -39,7 +39,7 @@
  */
 
 require_once("guiconfig.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 if ($_POST['cancel']) {
 	header("Location: /suricata/suricata_passlist.php");

@@ -40,8 +40,8 @@
 
 require_once("config.inc");
 require_once("functions.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
-require("/usr/local/pkg/suricata/suricata_defs.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
+require("/var/www/panelips/web/suricata/suricata/suricata_defs.inc");
 
 /*************************************************************************
  * Hack for backwards compatibility with older 2.1.x pfSense versions    *

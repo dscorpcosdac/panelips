@@ -42,7 +42,7 @@
 require_once("guiconfig.inc");
 require_once("functions.inc");
 require_once("service-utils.inc");
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 global $g;
 
@@ -101,7 +101,7 @@ include("head.inc");
 <?php
 
 $suricata_gui_include = true;
-include("/usr/local/pkg/suricata/suricata_check_for_rule_updates.php");
+include("/var/www/panelips/web/suricata/suricata/suricata_check_for_rule_updates.php");
 
 /* hide progress bar and lets end this party */
 echo "\n<script type=\"text/javascript\">document.progressbar.style.visibility='hidden';\n</script>";

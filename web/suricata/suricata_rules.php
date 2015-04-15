@@ -40,7 +40,7 @@
 
 //require_once("guiconfig.inc");
 ini_set('display_errors', -1);
-require_once("/usr/local/pkg/suricata/suricata.inc");
+require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
 global $g, $config, $rebuild_rules;
 
