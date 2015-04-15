@@ -98,9 +98,10 @@ function parse_config($parse = false) {
 
 	$lockkey = lock('config');
 	$config_parsed = false;
-
+echo "{$g['conf_path']}/config.xml";
 	if (!file_exists("{$g['conf_path']}/config.xml") || filesize("{$g['conf_path']}/config.xml") == 0) {
 		$last_backup = discover_last_backup();
+		echo 
 		if($last_backup) {
 			log_error(gettext("No config.xml found, attempting last known config restore."));
 			file_notice("config.xml", gettext("No config.xml found, attempting last known config restore."), "pfSenseConfigurator", "");
