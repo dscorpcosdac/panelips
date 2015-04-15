@@ -190,7 +190,7 @@ function generate_config_cache($config) {
 }
 
 function discover_last_backup() {
-	$backups = glob('/cf/conf/backup/*.xml');
+	$backups = glob('conf/backup/*.xml');
 	$last_backup = "";
 	$last_mtime = 0;
 	foreach($backups as $backup) {
