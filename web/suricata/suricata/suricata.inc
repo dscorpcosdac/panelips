@@ -41,9 +41,9 @@
 require_once("includes/config.inc");
 /*require_once("functions.inc");
 require_once("services.inc");
-require_once("service-utils.inc");
-require_once("pkg-utils.inc");
-require_once("filter.inc");*/
+require_once("service-utils.inc");*/
+require_once("includes/pkg-utils.inc");
+/*require_once("filter.inc");*/
 require("/var/www/panelips/web/suricata/suricata/suricata_defs.inc");
 
 global $g, $config;
