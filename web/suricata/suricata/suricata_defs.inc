@@ -38,7 +38,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
 */
 
-require_once("pkg-utils.inc");
+//require_once("pkg-utils.inc");
 
 /*************************************************************************/
 /* This file contains definitions for various CONSTANTS used throughout  */
