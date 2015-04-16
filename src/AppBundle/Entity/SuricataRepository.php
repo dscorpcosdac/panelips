@@ -256,7 +256,7 @@ function add_title_attribute($tag, $title) {
 	return $result;
 }
 
-function rulestoArray($rules_map){
+function rulestoArray($rules_map,$currentruleset){
 	$datos = array();
 foreach ($rules_map as $k1 => $rulem) {
 							foreach ($rulem as $k2 => $v) {

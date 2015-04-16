@@ -18,7 +18,7 @@ class SuricataController extends Controller
        //$suricata= new Suricata();
        	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/local.rules');
        echo '<pre>';	print_r($entidades); echo '</pre>';
-       $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades);
+       $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades,'local.rules');
        echo '<pre>';	print_r($procesoent); echo '</pre>';
         return $this->render('AppBundle:suricata:index.html.twig', array(
             'entities' => $procesoent,
