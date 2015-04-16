@@ -39,6 +39,7 @@
  */
 
 //require_once("guiconfig.inc");
+require_once("interfaces.inc");
 ini_set('display_errors', -1);
 require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
 
