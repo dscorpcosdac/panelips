@@ -17,8 +17,8 @@ class SuricataController extends Controller
         $em = $this->getDoctrine()->getManager();	
        //$suricata= new Suricata();
        	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/local.rules');
-       	print_r($entidades);
-        return $this->render('AppBundle:suricata:new.html.twig', array(
+       echo '<pre>';	print_r($entidades); echo '</pre>';
+        return $this->render('AppBundle:suricata:index.html.twig', array(
             'entities' => $entidades,
             'archivos' => $em->getRepository('AppBundle:Suricata')->readRules(),
         ));
