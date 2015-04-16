@@ -258,6 +258,7 @@ function add_title_attribute($tag, $title) {
 
 function rulestoArray($rules_map,$currentruleset){
 	$datos = array();
+	$counter = $enable_cnt = $disable_cnt = $user_enable_cnt = $user_disable_cnt = $managed_count = 0;
 foreach ($rules_map as $k1 => $rulem) {
 							foreach ($rulem as $k2 => $v) {
 								$sid = $this->suricata_get_sid($v['rule']);
