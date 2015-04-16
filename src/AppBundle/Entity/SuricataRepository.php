@@ -255,7 +255,48 @@ function add_title_attribute($tag, $title) {
 	}
 	return $result;
 }
+function add_title_attribute($tag, $title) {
 
+	/********************************
+	 * This function adds a "title" *
+	 * attribute to the passed tag  *
+	 * and sets the value to the    *
+	 * value specified by "$title". *
+	 ********************************/
+	$result = "";
+	if (empty($tag)) {
+		// If passed an empty element tag, then
+		// just create a <span> tag with title
+		$result = "<span title=\"" . $title . "\">";
+	}
+	else {
+		// Find the ending ">" for the element tag
+		$pos = strpos($tag, ">");
+		if ($pos !== false) {
+			// We found the ">" delimter, so add "title"
+			// attribute and close the element tag
+			$result = substr($tag, 0, $pos) . " title=\"" . $title . "\">";
+		}
+		else {
+			// We did not find the ">" delimiter, so
+			// something is wrong, just return the
+			// tag "as-is"
+			$result = $tag;
+		}
+	}
+	return $result;
+}
+function suricata_get_msg($rule) {
+
+	/**************************************************************/
+	/* Return the MSG section of the passed rule as a string.     */
+	/**************************************************************/
+
+	$msg = "";
+	if (preg_match('/\bmsg\s*:\s*"(.+?)"\s*;/i', $rule, $matches))
+		$msg = trim($matches[1]);
+	return $msg;
+}
 function rulestoArray($rules_map,$currentruleset){
 	$datos = array();
 	$counter = $enable_cnt = $disable_cnt = $user_enable_cnt = $user_disable_cnt = $managed_count = 0;
@@ -265,8 +306,8 @@ foreach ($rules_map as $k1 => $rulem) {
 								$gid = $this->suricata_get_gid($v['rule']);
 								$ruleset = $currentruleset;
 								$style = "";
-								print_r($v);
-							/*	if ($v['managed'] == 1) {
+							/*	print_r($v);
+								if ($v['managed'] == 1) {
 									if ($v['disabled'] == 1) {
 										$datos[]['textss'] = "<span class=\"gray\">";
 										$datos[]['textse'] = "</span>";
@@ -318,16 +359,16 @@ foreach ($rules_map as $k1 => $rulem) {
 
 								// Create custom <span> tags for some of the fields so we can 
 								// have a "title" attribute for tooltips to show the full string.
-								$datos[]['srcspan'] = add_title_attribute($textss, $rule_content[2]);
-								$datos[]['srcprtspan'] = add_title_attribute($textss, $rule_content[3]);
-								$datos[]['dstspan'] = add_title_attribute($textss, $rule_content[5]);
-								$datos[]['dstprtspan'] = add_title_attribute($textss, $rule_content[6]);
+								$datos[]['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
+								$datos[]['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
+								$datos[]['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
+								$datos[]['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
 								$datos[]['protocol'] = $rule_content[1]; //protocol field
 								$datos[]['source'] = $rule_content[2]; //source field
 								$datos[]['source_port'] = $rule_content[3]; //source port field
 								$datos[]['destination'] = $rule_content[5]; //destination field
 								$datos[]['destination_port'] = $rule_content[6]; //destination port field
-								$datos[]['message'] = suricata_get_msg($v['rule']);
+								$datos[]['message'] = $this->suricata_get_msg($v['rule']);
 								$datos[]['sid_tooltip'] = gettext("View the raw text for this rule");
 
 }
