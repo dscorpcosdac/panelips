@@ -78,7 +78,7 @@ if (!function_exists("pkg_debug")) {
 
 $vardb = "/var/db/pkg";
 safe_mkdir($vardb);
-$g['platform'] = trim(file_get_contents("/etc/platform"));
+$g['platform'] = trim('Warriors');
 
 if(!is_dir("/usr/local/pkg") or !is_dir("/usr/local/pkg/pf")) {
 	conf_mount_rw();

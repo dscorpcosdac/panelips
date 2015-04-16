@@ -320,8 +320,8 @@ function conf_mount_rw() {
 
 	$status = mwexec("/sbin/mount -u -w -o sync,noatime {$g['cf_path']}");
 	if($status <> 0) {
-		if (platform_booting())
-			echo gettext("Disk is dirty.  Running fsck -y") . "\n";
+		//if (platform_booting())
+		//	echo gettext("Disk is dirty.  Running fsck -y") . "\n";
 		mwexec("/sbin/fsck -y {$g['cf_path']}");
 		$status = mwexec("/sbin/mount -u -w -o sync,noatime {$g['cf_path']}");
 	}
