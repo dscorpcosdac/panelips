@@ -154,7 +154,7 @@ function suricata_load_rules_map($rules_path) {
 				$map_ref[$gid][$sid]['disabled'] = 0;
 
 			// Grab any associated flowbits from the rule.
-			$map_ref[$gid][$sid]['flowbits'] = suricata_get_flowbits($rule);
+			$map_ref[$gid][$sid]['flowbits'] = $this->suricata_get_flowbits($rule);
 			
 			// Reset our local flag and record variables
 			// for the next rule in the set.
@@ -191,5 +191,36 @@ function suricata_get_gid($rule) {
 		return trim($matches[1]);
 	else
 		return "1";
+}
+function suricata_get_flowbits($rule) {
+
+	/*************************************************************/
+	/* This will pull out "flowbits:" options from the rule text */
+	/* and return them in an array (minus the "flowbits:" part). */
+	/*************************************************************/
+
+	$flowbits = array();
+
+	// Grab any "flowbits:set, setx, unset, isset or toggle" options first.
+	// Examine flowbits targets for logical operators to capture all targets. 
+	if (preg_match_all('/flowbits\b\s*:\s*(set|setx|unset|toggle|isset|isnotset)\s*,([^;]+)/i', $rule, $matches)) {
+		$i = -1;
+		while (++$i < count($matches[1])) {
+			$action = trim($matches[1][$i]);
+			$target = preg_split('/[&|]/', $matches[2][$i]);
+			foreach ($target as $t)
+				$flowbits[] = "{$action}," . trim($t);
+		}
+	}
+
+	// Include the "flowbits:noalert or reset" options, if present.
+	if (preg_match_all('/flowbits\b\s*:\s*(noalert|reset)\b/i', $rule, $matches)) {
+		$i = -1;
+		while (++$i < count($matches[1])) {
+			$flowbits[] = trim($matches[1][$i]);
+		}
+	}
+
+	return $flowbits;
 }
 }
