@@ -279,46 +279,46 @@ foreach ($rules_map as $k1 => $rulem) {
 							/*	print_r($v);
 								if ($v['managed'] == 1) {
 									if ($v['disabled'] == 1) {
-										$datos[]['textss'] = "<span class=\"gray\">";
-										$datos[]['textse'] = "</span>";
-										$datos[]['style']= "style=\"opacity: 0.4; filter: alpha(opacity=40);\"";
-										$datos[]['title'] = gettext("Auto-disabled by settings on SID Mgmt tab");
+										$dato['textss'] = "<span class=\"gray\">";
+										$dato['textse'] = "</span>";
+										$dato['style']= "style=\"opacity: 0.4; filter: alpha(opacity=40);\"";
+										$dato['title'] = gettext("Auto-disabled by settings on SID Mgmt tab");
 									}
 									else {
-										$datos[]['textss'] = $textse = "";
-										$datos[]['ruleset'] = "suricata.rules";
-										$datos[]['title'] = gettext("Auto-managed by settings on SID Mgmt tab");
+										$dato['textss'] = $textse = "";
+										$dato['ruleset'] = "suricata.rules";
+										$dato['title'] = gettext("Auto-managed by settings on SID Mgmt tab");
 									}
-									$datos[]['iconb'] = "icon_advanced.gif";
+									$dato['iconb'] = "icon_advanced.gif";
 									$managed_count++;
 								}
 								elseif (isset($disablesid[$gid][$sid])) {
-									$datos[]['textss'] = "<span class=\"gray\">";
-									$datos[]['textse'] = "</span>";
-									$datos[]['iconb'] = "icon_reject_d.gif";
+									$dato['textss'] = "<span class=\"gray\">";
+									$dato['textse'] = "</span>";
+									$dato['iconb'] = "icon_reject_d.gif";
 									$disable_cnt++;
 									$user_disable_cnt++;
-									$datos[]['title'] = gettext("Disabled by user. Click to toggle to enabled state");
+									$dato['title'] = gettext("Disabled by user. Click to toggle to enabled state");
 								}*/
 								if (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
-									$textss= $datos[]['textss'] = "<span class=\"gray\">";
-									$datos[]['textse'] = "</span>";
-									$datos[]['iconb'] = "icon_block_d.gif";
+									$textss= $dato['textss'] = "<span class=\"gray\">";
+									$dato['textse'] = "</span>";
+									$dato['iconb'] = "icon_block_d.gif";
 									$disable_cnt++;
-									$datos[]['title'] = gettext("Disabled by default. Click to toggle to enabled state");
+									$dato['title'] = gettext("Disabled by default. Click to toggle to enabled state");
 								}
 								elseif (isset($enablesid[$gid][$sid])) {
-									$textss= $datos[]['textss'] = $textse = "";
-									$datos[]['iconb'] = "icon_reject.gif";
+									$textss= $dato['textss'] = $textse = "";
+									$dato['iconb'] = "icon_reject.gif";
 									$enable_cnt++;
 									$user_enable_cnt++;
-									$datos[]['title'] = gettext("Enabled by user. Click to toggle to disabled state");
+									$dato['title'] = gettext("Enabled by user. Click to toggle to disabled state");
 								}
 								else {
-									$textss=$datos[]['textss'] = $datos[]['textse'] = "";
-									$datos[]['iconb'] = "icon_block.gif";
+									$textss=$dato['textss'] = $dato['textse'] = "";
+									$dato['iconb'] = "icon_block.gif";
 									$enable_cnt++;
-									$datos[]['title'] = gettext("Enabled by default. Click to toggle to disabled state");
+									$dato['title'] = gettext("Enabled by default. Click to toggle to disabled state");
 								}
 
 								// Pick off the first section of the rule (prior to the start of the MSG field),
@@ -329,20 +329,20 @@ foreach ($rules_map as $k1 => $rulem) {
 
 								// Create custom <span> tags for some of the fields so we can 
 								// have a "title" attribute for tooltips to show the full string.
-								$datos[]['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
-								$datos[]['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
-								$datos[]['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
-								$datos[]['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
-								$datos[]['protocol'] = $rule_content[1]; //protocol field
-								$datos[]['source'] = $rule_content[2]; //source field
-								$datos[]['source_port'] = $rule_content[3]; //source port field
-								$datos[]['destination'] = $rule_content[5]; //destination field
-								$datos[]['destination_port'] = $rule_content[6]; //destination port field
-								$datos[]['message'] = $this->suricata_get_msg($v['rule']);
-								$datos[]['sid_tooltip'] = gettext("View the raw text for this rule");
-
-}
-}
+								$dato['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
+								$dato['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
+								$dato['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
+								$dato['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
+								$dato['protocol'] = $rule_content[1]; //protocol field
+								$dato['source'] = $rule_content[2]; //source field
+								$dato['source_port'] = $rule_content[3]; //source port field
+								$dato['destination'] = $rule_content[5]; //destination field
+								$dato['destination_port'] = $rule_content[6]; //destination port field
+								$dato['message'] = $this->suricata_get_msg($v['rule']);
+								$dato['sid_tooltip'] = gettext("View the raw text for this rule");
+							$datos[]=$dato;
+						}
+					}
 return $datos;
 
 }
