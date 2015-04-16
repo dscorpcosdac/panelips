@@ -301,21 +301,21 @@ foreach ($rules_map as $k1 => $rulem) {
 									$datos[]['title'] = gettext("Disabled by user. Click to toggle to enabled state");
 								}*/
 								if (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
-									$datos[]['textss'] = "<span class=\"gray\">";
+									$textss= $datos[]['textss'] = "<span class=\"gray\">";
 									$datos[]['textse'] = "</span>";
 									$datos[]['iconb'] = "icon_block_d.gif";
 									$disable_cnt++;
 									$datos[]['title'] = gettext("Disabled by default. Click to toggle to enabled state");
 								}
 								elseif (isset($enablesid[$gid][$sid])) {
-									$datos[]['textss'] = $textse = "";
+									$textss= $datos[]['textss'] = $textse = "";
 									$datos[]['iconb'] = "icon_reject.gif";
 									$enable_cnt++;
 									$user_enable_cnt++;
 									$datos[]['title'] = gettext("Enabled by user. Click to toggle to disabled state");
 								}
 								else {
-									$datos[]['textss'] = $datos[]['textse'] = "";
+									$textss=$datos[]['textss'] = $datos[]['textse'] = "";
 									$datos[]['iconb'] = "icon_block.gif";
 									$enable_cnt++;
 									$datos[]['title'] = gettext("Enabled by default. Click to toggle to disabled state");
@@ -329,10 +329,10 @@ foreach ($rules_map as $k1 => $rulem) {
 
 								// Create custom <span> tags for some of the fields so we can 
 								// have a "title" attribute for tooltips to show the full string.
-								$datos[]['srcspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[2]);
-								$datos[]['srcprtspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[3]);
-								$datos[]['dstspan'] =$this->add_title_attribute($datos[]['textss'], $rule_content[5]);
-								$datos[]['dstprtspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[6]);
+								$datos[]['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
+								$datos[]['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
+								$datos[]['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
+								$datos[]['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
 								$datos[]['protocol'] = $rule_content[1]; //protocol field
 								$datos[]['source'] = $rule_content[2]; //source field
 								$datos[]['source_port'] = $rule_content[3]; //source port field
