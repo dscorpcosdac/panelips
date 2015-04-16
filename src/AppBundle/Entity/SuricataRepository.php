@@ -74,7 +74,7 @@ function suricata_load_rules_map($rules_path) {
 
         // Read the rule files into an array, then iterate the list
 	// to process the rules from the files one-by-one.
-	print_r($rule_files);
+	
 	foreach ($rule_files as $file) {
 
 		// Don't process files with "deleted" in the filename.
@@ -89,7 +89,7 @@ function suricata_load_rules_map($rules_path) {
 		$rules_array = file($file, FILE_SKIP_EMPTY_LINES);
 		$record = "";
 		$b_Multiline = false;
-
+print_r($rules_array);
 		// Read and process each line from the rules in the
 		// current file into an array.
 		foreach ($rules_array as $rule) {
