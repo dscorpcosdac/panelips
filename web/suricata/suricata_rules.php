@@ -140,21 +140,21 @@ elseif ($_POST['openruleset'])
 else
 	$currentruleset = $categories[0];
 
-if (empty($categories[0]) && ($currentruleset != "custom.rules") && ($currentruleset != "Auto-Flowbit Rules")) {
+if (empty($categories[0]) && ($currentruleset != "local.rules") && ($currentruleset != "Auto-Flowbit Rules")) {
 	if (!empty($a_rule[$id]['ips_policy']))
 		$currentruleset = "IPS Policy - " . ucfirst($a_rule[$id]['ips_policy']);
 	else
-		$currentruleset = "custom.rules";
+		$currentruleset = "local.rules";
 }
 
 /* One last sanity check -- if the rules directory is empty, default to loading custom rules */
 $tmp = glob("{$suricatadir}rules/*.rules");
 if (empty($tmp))
-	$currentruleset = "custom.rules";
+	$currentruleset = "local.rules";
 
 $ruledir = "{$suricatadir}rules";
 $rulefile = "{$ruledir}/{$currentruleset}";
-if ($currentruleset != 'custom.rules') {
+if ($currentruleset != 'local.rules') {
 	// Read the current rules file into our rules map array.
 	// If it is the auto-flowbits file, set the full path.
 	if ($currentruleset == "Auto-Flowbit Rules")
@@ -502,7 +502,7 @@ if ($savemsg) {
 			<tr>
 				<td class="vncell" height="30px"><strong><?php echo gettext("Category:"); ?></strong>&nbsp;&nbsp;
 					<select id="selectbox" name="selectbox" class="formselect" onChange="go();">
-					<option value='custom.rules'>custom.rules</option>
+					<option value='local.rules'>local.rules</option>
 					<?php
 						$files = $categories;
 						if ($a_rule[$id]['ips_policy_enable'] == 'on')
@@ -529,7 +529,7 @@ if ($savemsg) {
 				</td>
 			</tr>
 
-		<?php if ($currentruleset == 'custom.rules'): ?>
+		<?php if ($currentruleset == 'local.rules'): ?>
 			<tr>
 				<td class="listtopic"><?php echo gettext("Defined Custom Rules"); ?></td>
 			</tr>

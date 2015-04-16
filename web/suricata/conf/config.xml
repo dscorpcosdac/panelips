@@ -488,7 +488,7 @@
 				<rulesets/>
 			</rule>
 			<rule>
-				<interface>lan</interface>
+				<interface>br0</interface>
 				<enable>on</enable>
 				<uuid>61703</uuid>
 				<descr><![CDATA[WAN]]></descr>
