@@ -343,6 +343,8 @@ foreach ($rules_map as $k1 => $rulem) {
 
 }
 }
+return $datos;
+
 }
 
 }
