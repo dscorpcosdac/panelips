@@ -39,10 +39,10 @@
  */
 
 //require_once("guiconfig.inc");
-require_once("interfaces.inc");
+//require_once("interfaces.inc");
 ini_set('display_errors', -1);
 require_once("/var/www/panelips/web/suricata/suricata/suricata.inc");
-
+require_once("includes/interfaces.inc");
 global $g, $config, $rebuild_rules;
 
 $suricatadir = SURICATADIR;
