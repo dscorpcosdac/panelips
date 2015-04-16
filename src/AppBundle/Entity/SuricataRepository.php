@@ -260,8 +260,8 @@ function rulestoArray($rules_map){
 	$datos = array();
 foreach ($rules_map as $k1 => $rulem) {
 							foreach ($rulem as $k2 => $v) {
-								$sid = suricata_get_sid($v['rule']);
-								$gid = suricata_get_gid($v['rule']);
+								$sid = $this->suricata_get_sid($v['rule']);
+								$gid = $this->suricata_get_gid($v['rule']);
 								$ruleset = $currentruleset;
 								$style = "";
 
