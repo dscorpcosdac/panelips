@@ -329,10 +329,10 @@ foreach ($rules_map as $k1 => $rulem) {
 
 								// Create custom <span> tags for some of the fields so we can 
 								// have a "title" attribute for tooltips to show the full string.
-								$datos[]['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
-								$datos[]['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
-								$datos[]['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
-								$datos[]['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
+								$datos[]['srcspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[2]);
+								$datos[]['srcprtspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[3]);
+								$datos[]['dstspan'] =$this->add_title_attribute($datos[]['textss'], $rule_content[5]);
+								$datos[]['dstprtspan'] = $this->add_title_attribute($datos[]['textss'], $rule_content[6]);
 								$datos[]['protocol'] = $rule_content[1]; //protocol field
 								$datos[]['source'] = $rule_content[2]; //source field
 								$datos[]['source_port'] = $rule_content[3]; //source port field
