@@ -255,37 +255,7 @@ function add_title_attribute($tag, $title) {
 	}
 	return $result;
 }
-function add_title_attribute($tag, $title) {
 
-	/********************************
-	 * This function adds a "title" *
-	 * attribute to the passed tag  *
-	 * and sets the value to the    *
-	 * value specified by "$title". *
-	 ********************************/
-	$result = "";
-	if (empty($tag)) {
-		// If passed an empty element tag, then
-		// just create a <span> tag with title
-		$result = "<span title=\"" . $title . "\">";
-	}
-	else {
-		// Find the ending ">" for the element tag
-		$pos = strpos($tag, ">");
-		if ($pos !== false) {
-			// We found the ">" delimter, so add "title"
-			// attribute and close the element tag
-			$result = substr($tag, 0, $pos) . " title=\"" . $title . "\">";
-		}
-		else {
-			// We did not find the ">" delimiter, so
-			// something is wrong, just return the
-			// tag "as-is"
-			$result = $tag;
-		}
-	}
-	return $result;
-}
 function suricata_get_msg($rule) {
 
 	/**************************************************************/
