@@ -223,4 +223,114 @@ function suricata_get_flowbits($rule) {
 
 	return $flowbits;
 }
+
+function add_title_attribute($tag, $title) {
+
+	/********************************
+	 * This function adds a "title" *
+	 * attribute to the passed tag  *
+	 * and sets the value to the    *
+	 * value specified by "$title". *
+	 ********************************/
+	$result = "";
+	if (empty($tag)) {
+		// If passed an empty element tag, then
+		// just create a <span> tag with title
+		$result = "<span title=\"" . $title . "\">";
+	}
+	else {
+		// Find the ending ">" for the element tag
+		$pos = strpos($tag, ">");
+		if ($pos !== false) {
+			// We found the ">" delimter, so add "title"
+			// attribute and close the element tag
+			$result = substr($tag, 0, $pos) . " title=\"" . $title . "\">";
+		}
+		else {
+			// We did not find the ">" delimiter, so
+			// something is wrong, just return the
+			// tag "as-is"
+			$result = $tag;
+		}
+	}
+	return $result;
+}
+
+function rulestoArray($rules_map){
+	$datos = array();
+foreach ($rules_map as $k1 => $rulem) {
+							foreach ($rulem as $k2 => $v) {
+								$sid = suricata_get_sid($v['rule']);
+								$gid = suricata_get_gid($v['rule']);
+								$ruleset = $currentruleset;
+								$style = "";
+
+								if ($v['managed'] == 1) {
+									if ($v['disabled'] == 1) {
+										$datos[]['textss'] = "<span class=\"gray\">";
+										$datos[]['textse'] = "</span>";
+										$datos[]['style']= "style=\"opacity: 0.4; filter: alpha(opacity=40);\"";
+										$datos[]['title'] = gettext("Auto-disabled by settings on SID Mgmt tab");
+									}
+									else {
+										$datos[]['textss'] = $textse = "";
+										$datos[]['ruleset'] = "suricata.rules";
+										$datos[]['title'] = gettext("Auto-managed by settings on SID Mgmt tab");
+									}
+									$datos[]['iconb'] = "icon_advanced.gif";
+									$managed_count++;
+								}
+								elseif (isset($disablesid[$gid][$sid])) {
+									$datos[]['textss'] = "<span class=\"gray\">";
+									$datos[]['textse'] = "</span>";
+									$datos[]['iconb'] = "icon_reject_d.gif";
+									$disable_cnt++;
+									$user_disable_cnt++;
+									$datos[]['title'] = gettext("Disabled by user. Click to toggle to enabled state");
+								}
+								elseif (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
+									$datos[]['textss'] = "<span class=\"gray\">";
+									$datos[]['textse'] = "</span>";
+									$datos[]['iconb'] = "icon_block_d.gif";
+									$disable_cnt++;
+									$datos[]['title'] = gettext("Disabled by default. Click to toggle to enabled state");
+								}
+								elseif (isset($enablesid[$gid][$sid])) {
+									$datos[]['textss'] = $textse = "";
+									$datos[]['iconb'] = "icon_reject.gif";
+									$enable_cnt++;
+									$user_enable_cnt++;
+									$datos[]['title'] = gettext("Enabled by user. Click to toggle to disabled state");
+								}
+								else {
+									$datos[]['textss'] = $datos[]['textse'] = "";
+									$datos[]['iconb'] = "icon_block.gif";
+									$enable_cnt++;
+									$datos[]['title'] = gettext("Enabled by default. Click to toggle to disabled state");
+								}
+
+								// Pick off the first section of the rule (prior to the start of the MSG field),
+								// and then use a REGX split to isolate the remaining fields into an array.
+								$tmp = substr($v['rule'], 0, strpos($v['rule'], "("));
+								$tmp = trim(preg_replace('/^\s*#+\s*/', '', $tmp));
+								$rule_content = preg_split('/[\s]+/', $tmp);
+
+								// Create custom <span> tags for some of the fields so we can 
+								// have a "title" attribute for tooltips to show the full string.
+								$datos[]['srcspan'] = add_title_attribute($textss, $rule_content[2]);
+								$datos[]['srcprtspan'] = add_title_attribute($textss, $rule_content[3]);
+								$datos[]['dstspan'] = add_title_attribute($textss, $rule_content[5]);
+								$datos[]['dstprtspan'] = add_title_attribute($textss, $rule_content[6]);
+								$datos[]['protocol'] = $rule_content[1]; //protocol field
+								$datos[]['source'] = $rule_content[2]; //source field
+								$datos[]['source_port'] = $rule_content[3]; //source port field
+								$datos[]['destination'] = $rule_content[5]; //destination field
+								$datos[]['destination_port'] = $rule_content[6]; //destination port field
+								$datos[]['message'] = suricata_get_msg($v['rule']);
+								$datos[]['sid_tooltip'] = gettext("View the raw text for this rule");
+
+}
+}
+}
+
 }
