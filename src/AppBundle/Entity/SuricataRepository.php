@@ -264,7 +264,7 @@ foreach ($rules_map as $k1 => $rulem) {
 								$gid = $this->suricata_get_gid($v['rule']);
 								$ruleset = $currentruleset;
 								$style = "";
-
+								print_r($v);
 								if ($v['managed'] == 1) {
 									if ($v['disabled'] == 1) {
 										$datos[]['textss'] = "<span class=\"gray\">";
