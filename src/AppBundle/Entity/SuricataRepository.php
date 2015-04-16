@@ -124,14 +124,14 @@ function suricata_load_rules_map($rules_path) {
 
 			// Get and test the SID.  If we don't find one,
 			// ignore and skip this rule as it is invalid.
-			$sid = suricata_get_sid($rule);
+			$sid = $this->suricata_get_sid($rule);
 			if (empty($sid)) {
 				$b_Multiline = false;
 				$record = "";
 				continue;
 			}
 
-			$gid = suricata_get_gid($rule);
+			$gid = $this->suricata_get_gid($rule);
 			if (!is_array($map_ref[$gid]))
 				$map_ref[$gid] = array();
 			if (!is_array($map_ref[$gid][$sid]))
@@ -165,5 +165,30 @@ function suricata_load_rules_map($rules_path) {
 		unset($rules_array);
 	}
 	return $map_ref;
+}
+
+function suricata_get_sid($rule) {
+
+	/***************************************************************/
+	/* If a sid is defined, then return it, else default to an     */
+	/* empty value.                                                */
+	/***************************************************************/
+
+	if (preg_match('/\bsid\s*:\s*(\d+)\s*;/i', $rule, $matches))
+		return trim($matches[1]);
+	else
+		return "";
+}
+function suricata_get_gid($rule) {
+
+	/****************************************************************/
+	/* If a gid is defined, then return it, else default to "1" for */
+	/* general text rules match.                                    */
+	/****************************************************************/
+
+	if (preg_match('/\bgid\s*:\s*(\d+)\s*;/i', $rule, $matches))
+		return trim($matches[1]);
+	else
+		return "1";
 }
 }
