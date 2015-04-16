@@ -350,7 +350,7 @@ function conf_mount_ro() {
 	global $g, $config;
 
 	/* Do not trust $g['platform'] since this can be clobbered during factory reset. */
-	$platform = trim(file_get_contents("/etc/platform"));
+	$platform = trim('Warriors');
 	/* do not umount on cdrom or pfSense platforms */
 	if($platform == "cdrom" or $platform == "pfSense")
 		return;
