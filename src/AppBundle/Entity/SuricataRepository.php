@@ -74,7 +74,7 @@ function suricata_load_rules_map($rules_path) {
 
         // Read the rule files into an array, then iterate the list
 	// to process the rules from the files one-by-one.
-	
+
 	foreach ($rule_files as $file) {
 
 		// Don't process files with "deleted" in the filename.
@@ -89,7 +89,7 @@ function suricata_load_rules_map($rules_path) {
 		$rules_array = file($file, FILE_SKIP_EMPTY_LINES);
 		$record = "";
 		$b_Multiline = false;
-print_r($rules_array);
+//print_r($rules_array);
 		// Read and process each line from the rules in the
 		// current file into an array.
 		foreach ($rules_array as $rule) {
@@ -133,9 +133,9 @@ print_r($rules_array);
 			}
 
 			$gid = $this->suricata_get_gid($rule);
-			if (!is_array($map_ref[$gid]))
+			if (!isset($map_ref[$gid]))
 				$map_ref[$gid] = array();
-			if (!is_array($map_ref[$gid][$sid]))
+			if (!isset($map_ref[$gid][$sid]))
 				$map_ref[$gid][$sid] = array();
 			$map_ref[$gid][$sid]['rule'] = $rule;
 			$map_ref[$gid][$sid]['category'] = basename($file, ".rules");
