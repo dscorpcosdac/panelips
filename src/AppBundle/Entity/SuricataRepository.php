@@ -265,7 +265,7 @@ foreach ($rules_map as $k1 => $rulem) {
 								$ruleset = $currentruleset;
 								$style = "";
 								print_r($v);
-								if ($v['managed'] == 1) {
+							/*	if ($v['managed'] == 1) {
 									if ($v['disabled'] == 1) {
 										$datos[]['textss'] = "<span class=\"gray\">";
 										$datos[]['textse'] = "</span>";
@@ -287,8 +287,8 @@ foreach ($rules_map as $k1 => $rulem) {
 									$disable_cnt++;
 									$user_disable_cnt++;
 									$datos[]['title'] = gettext("Disabled by user. Click to toggle to enabled state");
-								}
-								elseif (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
+								}*/
+								if (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
 									$datos[]['textss'] = "<span class=\"gray\">";
 									$datos[]['textse'] = "</span>";
 									$datos[]['iconb'] = "icon_block_d.gif";
