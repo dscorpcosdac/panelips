@@ -21,7 +21,10 @@ class SuricataController extends Controller
        $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades,'local.rules');
        echo '<pre>';	print_r($procesoent); echo '</pre>';
         return $this->render('AppBundle:suricata:index.html.twig', array(
-            'entities' => $procesoent,
+            'entities' => $procesoent['datos'],
+            'enabled' => $procesoent['enabled'],
+            'disabled' => $procesoent['disabled'],
+            'totalrules' => count($procesoent['datos']),
             'archivos' => $em->getRepository('AppBundle:Suricata')->readRules(),
         ));
     }

@@ -60,10 +60,13 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     </div>
                     <div class="ibox-content">                   
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Accion</label>
+                            <label class="col-sm-2 control-label">Categorias</label>
                                 <div class="col-sm-10">
-                                    {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
-                                    <span class="help-block m-b-none">{{ form_errors(form.nombre) }}</span>
+                                    <select>
+                                    {% for entity in archivos %}
+                                        <option value="entity">entity</option>
+                                    {% endfor %}
+                                    </select>
                                 </div>
                         </div>
 
@@ -100,10 +103,12 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
         <thead>
             <tr>
                 <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
-                <th>MAC</th>
-                <th>IP ADDRESSES</th>
+                <th>Protocolo</th>
+                <th>Source</th>
+                <th>Source - Port</th>
+                <th>Destination</th>
+                <th>Destination - Port</th>
+                <th>Message</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -113,15 +118,18 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
         {% if entity|length > 2 %}
             <tr id="ctnTr{{entity.id}}">
                 <td>{{foo}}</td>
-                <td><input type="text" name="txtAction" id="txtAction" value=" {{ entity.0 }}"><span style="display:none">{{ entity.0 }}</span></td>
-                <td>{{ entity.1 }}</td>
-                <td><input type="text" name="txtMac" id="txtMac" value=" {{ entity.3 }}"><span style="display:none">{{ entity.3 }}</span></td>
-                <td><input type="text" name="txtIp" id="txtIp" value=" {{ entity.6 }}"><span style="display:none">{{ entity.6 }}</span></td>
-                <td>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.protocol }}</td>
+                <td>{{ entity.source }}</td>
+                <td>{{ entity.source_port }}</td>
+                <td>{{ entity.destination }}</td>
+                <td>{{ entity.destination_port }}</td>
+                <td>{{ entity.message }}</td>
+                 <td>
                     <input type="hidden" name="txtElid" value="{{entity.id}}">
                      <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
                      </button>
-                    <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" data-original-title="Eliminar Entrada"><i class="fa fa-trash-o"></i>
+                    <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" data-original-title="Desactivar Entrada"><i class="fa fa-trash-o"></i>
                      </button>
                
                 </td>
@@ -139,6 +147,14 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <th>IP ADDRESSES</th>
                 <th>Actions</th>
             </tr>
+            <tr>
+               <th>Total Reglas: {{totalrules}}</th>
+                <th>Activas: {{enabled}}</th>
+                <th>Inactivas: {{disabled}}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
             </tfoot>
             </table>
 
@@ -147,7 +163,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
             </div>
             </div>
 
-        <form id="frmDelete" method="POST" action="{{path('maclist_delete')}}"><input type="hidden" name="cualid" id="cualid"></form>
+        
     {% endblock %}    {% block js %}
     <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript">

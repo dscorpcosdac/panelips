@@ -273,6 +273,7 @@ function rulestoArray($rules_map,$currentruleset){
 foreach ($rules_map as $k1 => $rulem) {
 							foreach ($rulem as $k2 => $v) {
 								$sid = $this->suricata_get_sid($v['rule']);
+								$dato['id']=$sid;
 								$gid = $this->suricata_get_gid($v['rule']);
 								$ruleset = $currentruleset;
 								$style = "";
@@ -303,20 +304,20 @@ foreach ($rules_map as $k1 => $rulem) {
 								if (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
 									$textss= $dato['textss'] = "<span class=\"gray\">";
 									$dato['textse'] = "</span>";
-									$dato['iconb'] = "icon_block_d.gif";
+									$dato['iconb'] = "inactivo";
 									$disable_cnt++;
 									$dato['title'] = gettext("Disabled by default. Click to toggle to enabled state");
 								}
 								elseif (isset($enablesid[$gid][$sid])) {
 									$textss= $dato['textss'] = $textse = "";
-									$dato['iconb'] = "icon_reject.gif";
+									$dato['iconb'] = "activo";
 									$enable_cnt++;
-									$user_enable_cnt++;
+									$enable_cnt++;
 									$dato['title'] = gettext("Enabled by user. Click to toggle to disabled state");
 								}
 								else {
 									$textss=$dato['textss'] = $dato['textse'] = "";
-									$dato['iconb'] = "icon_block.gif";
+									$dato['iconb'] = "activo";
 									$enable_cnt++;
 									$dato['title'] = gettext("Enabled by default. Click to toggle to disabled state");
 								}
@@ -329,21 +330,21 @@ foreach ($rules_map as $k1 => $rulem) {
 
 								// Create custom <span> tags for some of the fields so we can 
 								// have a "title" attribute for tooltips to show the full string.
-								$dato['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
-								$dato['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
-								$dato['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
-								$dato['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
+								//$dato['srcspan'] = $this->add_title_attribute($textss, $rule_content[2]);
+								//$dato['srcprtspan'] = $this->add_title_attribute($textss, $rule_content[3]);
+								//$dato['dstspan'] =$this->add_title_attribute($textss, $rule_content[5]);
+								//$dato['dstprtspan'] = $this->add_title_attribute($textss, $rule_content[6]);
 								$dato['protocol'] = $rule_content[1]; //protocol field
 								$dato['source'] = $rule_content[2]; //source field
 								$dato['source_port'] = $rule_content[3]; //source port field
 								$dato['destination'] = $rule_content[5]; //destination field
 								$dato['destination_port'] = $rule_content[6]; //destination port field
 								$dato['message'] = $this->suricata_get_msg($v['rule']);
-								$dato['sid_tooltip'] = gettext("View the raw text for this rule");
+								//$dato['sid_tooltip'] = gettext("View the raw text for this rule");
 							$datos[]=$dato;
 						}
 					}
-return $datos;
+return array('datos'=>$datos,'enabled'=>$enable_cnt,'disabled'=>$disable_cnt);
 
 }
 
