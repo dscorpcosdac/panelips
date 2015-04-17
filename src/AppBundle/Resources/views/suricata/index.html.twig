@@ -65,7 +65,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                                 <div class="col-sm-10">
                                     <select name="archivo">
                                     {% for entity in archivos %}
-                                        <option value="{{entity}}" {% if entity= archivo %} selected="selected" {% endif %} >{{entity|replace({'/etc/nsm/rules/': ''}}</option>
+                                        <option value="{{entity}}" {% if entity= archivo %} selected="selected" {% endif %} >{{entity|replace({'/etc/nsm/rules/': ''})}}</option>
                                     {% endfor %}
                                     </select>
                                 </div>
