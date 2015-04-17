@@ -58,7 +58,8 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                             </a>
                         </div>
                     </div>
-                    <div class="ibox-content">                   
+                    <div class="ibox-content">   
+                    <form method="POST" action="{{path('suricata-homepage')}}" >              
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Categorias</label>
                                 <div class="col-sm-10">
@@ -75,6 +76,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                             <a href="{{ path('homepage') }}" class="btn btn-w-m btn-warning"><i class="fa fa-warning"></i> Cancelar</a>
                             <button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Buscar</button>                   
                          </div>
+                    </form>  
                     </div>
                  </div>
             </div>

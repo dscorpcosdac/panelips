@@ -15,10 +15,12 @@ class SuricataController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();	
+        $archivo=$this->get('request')->request->get('archivo', '/etc/nsm/rules/local.rules');
+        $sinnada=str_replace('/etc/nsm/rules/', '', $archivo);
        //$suricata= new Suricata();
-       	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/local.rules');
+       	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map($archivo);
        //echo '<pre>';	print_r($entidades); echo '</pre>';
-       $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades,'local.rules');
+       $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades, $sinnada);
       // echo '<pre>';	print_r($procesoent); echo '</pre>';
         return $this->render('AppBundle:suricata:index.html.twig', array(
             'entities' => $procesoent['datos'],
