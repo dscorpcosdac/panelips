@@ -64,7 +64,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                                 <div class="col-sm-10">
                                     <select>
                                     {% for entity in archivos %}
-                                        <option value="entity">entity</option>
+                                        <option value="{{entity}}">{{entity}}</option>
                                     {% endfor %}
                                     </select>
                                 </div>
@@ -73,7 +73,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">                           
                             <a href="{{ path('homepage') }}" class="btn btn-w-m btn-warning"><i class="fa fa-warning"></i> Cancelar</a>
-                            <button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Guardar</button>                   
+                            <button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Buscar</button>                   
                          </div>
                     </div>
                  </div>
@@ -113,12 +113,10 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
             </tr>
         </thead>
         <tbody id="bodyPoliza">
-        {% set foo = 1 %}
-        {% for entity in entities %}
+         {% for entity in entities %}
         {% if entity|length > 2 %}
             <tr id="ctnTr{{entity.id}}">
-                <td>{{foo}}</td>
-                <td>{{ entity.id }}</td>
+                 <td>{{ entity.id }}</td>
                 <td>{{ entity.protocol }}</td>
                 <td>{{ entity.source }}</td>
                 <td>{{ entity.source_port }}</td>
@@ -134,8 +132,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                
                 </td>
             </tr>
-             {% set foo = foo + 1 %}
-            {% endif %} 
+             {% endif %} 
         {% endfor %}
         </tbody>
      <tfoot>
