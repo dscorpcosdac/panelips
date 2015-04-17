@@ -65,7 +65,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                                 <div class="col-sm-10">
                                     <select name="archivo">
                                     {% for entity in archivos %}
-                                        <option value="{{entity}}" {% if entity= archivo %} selected="selected" {% endif %} >
+                                        <option value="{{entity}}" {% if entity == archivo %} selected="selected" {% endif %} >
                                         {{entity|replace({'/etc/nsm/rules/': ''})}}</option>
                                     {% endfor %}
                                     </select>
@@ -131,7 +131,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                      <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
                      </button>
                     
-                     {% if entity.iconb='activo' %}
+                     {% if entity.iconb == 'activo' %}
                         <button type="submit" class="btn  form_transaccion_delete" entidad="{{entity.id}}" title="Desactivar Entrada"><i class="fa fa-trash-o"></i>
                          </button>
                         {% else %}
