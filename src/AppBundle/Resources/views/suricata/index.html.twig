@@ -133,7 +133,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     {% if sinnada == 'local.rules' %}
                     <form method="POST" action="{{path('rule_edit')}}">
                         <input type="hidden" name="file" value="{{sinnada}}">
-                        <input type="hidden" name="rule" value="{{entity.rule}}">
+                        <input type="hidden" name="rule" value="{{entity.ruleencode}}">
                           <button type="submit"><i class="fa fa-edit"></i>
                          </button>
                     </form>
