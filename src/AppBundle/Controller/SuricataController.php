@@ -303,7 +303,8 @@ class SuricataController extends Controller
      */
     public function chechSuricataAction()
     {
-        $resultado=system('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
+        $resultado=system('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0 > /var/www/panelips/web/rules/local.txt');
+        $resultado=shell_exec('more /var/www/panelips/web/rules/local.txt');
         echo "<pre>$resultado</pre>";
         
         $pos = strpos($resultado, 'ERRCODE');
