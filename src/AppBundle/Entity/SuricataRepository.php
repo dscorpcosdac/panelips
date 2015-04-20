@@ -38,13 +38,13 @@ class SuricataRepository extends EntityRepository
 	                      		}
 	                      	}
                         
-                        	$partes[]['activo']=$activo;
-                        	$partes[]['value']=$value;
+                        	$partes[]=array('value'=>$value,'activo'=>$activo);
+                        	//$partes[]['value']=$value;
                     	}
                 }else{
                 	 foreach ($rule_files as $value) {
-                	 	$partes[]['activo']=0;
-                        $partes[]['value']=$value;
+                	 	$partes[]=array('value'=>$value,'activo'=>0);
+                        //$partes[]['value']=$value;
                 	 }
                 }
                
