@@ -360,6 +360,11 @@ class SuricataController extends Controller
                                     }
                                     
                                 }
+                                if($x==0){
+                                    $file = fopen($archivo, "a");
+                                    fwrite($file, $unrule . PHP_EOL);
+                                    fclose($file);
+                                }
                             }else{
                                 if($x==0){
                                     $file = fopen($archivo, "a");
