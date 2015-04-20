@@ -207,7 +207,7 @@ class SuricataController extends Controller
             fclose($puntero);
            
 	          
-           return $this->redirect($this->generateUrl('suricata-homepage'));
+           return $this->redirect($this->generateUrl('restart_suricata'));
     }
 
         /**
@@ -320,10 +320,8 @@ class SuricataController extends Controller
         $resultado=shell_exec('sudo kill -USR2 10238');
         //echo $resultado;
         
-        echo $resultado;
-        $response = new Response(json_encode(array('funciono'=>true)));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+        //echo $resultado;
+        return $this->redirect($this->generateUrl('suricata-homepage'));
     }
 
     /**
