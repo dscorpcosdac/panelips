@@ -253,6 +253,7 @@ class SuricataController extends Controller
         return $this->render('AppBundle:suricata:edit.html.twig', array(
            'file'=>$file,
            'rule'=>trim( base64_decode(urldecode($rule))), 
+           'rulea'=>trim($rule), 
         ));
     }
 
@@ -262,22 +263,31 @@ class SuricataController extends Controller
     public function ruleUpdateAction()
     {
         $rule=$this->get('request')->request->get('rule', '');
-        $file=$this->get('request')->request->get('file', '');       
+        $rulea=$this->get('request')->request->get('rulea', '');
+        $file=$this->get('request')->request->get('file', ''); 
+        $rulea =>trim( base64_decode(urldecode($rule))),
+
         $archivo = '/etc/nsm/rules/'.$file;
             $abrir = fopen($archivo,'r+');
             $contenido = fread($abrir,filesize($archivo));
             fclose($abrir);        
             $contenido = explode("\n",$contenido);
             $i=$x=0;
+            $nuevas=array();
             foreach ($contenido as $key ) {
-                if($key==$rule){
+                if($key==$rulea){
+                    $nuevas[]=$rule;
                     $x++;
+                }else{
+                    $nuevas[]=$key;
                 }
                 
             }
             if($x==0){
-                $file = fopen($archivo, "a");
-                fwrite($file, $rule . PHP_EOL);
+                $b = array_values($nuevas);
+                $otro = implode("\n",$b); 
+                $file = fopen($archivo, "w+");
+                fwrite($file, $otro . PHP_EOL);
                 fclose($file);
             }
         return $this->redirect($this->generateUrl('suricata-homepage'));
@@ -306,7 +316,7 @@ class SuricataController extends Controller
      */
     public function restartSuricataAction()
     {
-        $resultado=shell_exec('kill -USR2 10238');
+        $resultado=shell_exec('sudo kill -USR2 10238');
         //echo $resultado;
         
         echo $resultado;
