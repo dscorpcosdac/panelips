@@ -131,7 +131,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                  <td>
                     <input type="hidden" name="txtElid" value="{{entity.id}}">
                     {% if sinnada == 'local.rules' %}
-                         <a href="{{path('rule_edit', { 'rule': entity.ruleencode, 'file':archivo})}}"  class="" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-edit"></i>
+                         <a href="{{path('rule_edit', {'file':archivo, 'rule': entity.ruleencode})}}"  class="" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-edit"></i>
                          </button>
                     {% endif %}
                      {% if entity.iconb == 'activo' %}
