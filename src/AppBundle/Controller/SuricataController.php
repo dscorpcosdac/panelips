@@ -310,7 +310,7 @@ class SuricataController extends Controller
         //echo $resultado;
         
         echo $resultado;
-        $response = new Response(json_encode(array('funciono'=>$ok)));
+        $response = new Response(json_encode(array('funciono'=>true)));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
