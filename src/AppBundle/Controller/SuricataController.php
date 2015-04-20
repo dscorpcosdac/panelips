@@ -332,10 +332,16 @@ class SuricataController extends Controller
                 }
 
                 $archivo =$inactivoArchivo;
-                $abrir = fopen($archivo,'r+');
-                $contenido = fread($abrir,filesize($archivo));
-                fclose($abrir);        
-                $contenido = explode("\n",$contenido);
+                $laz=0;
+                if(filesize($archivo)>0){
+                    $abrir = fopen($archivo,'r+');
+                    $contenido = fread($abrir,filesize($archivo));
+                    fclose($abrir);        
+                    $contenido = explode("\n",$contenido);
+                }else{
+                    $laz++;
+                }
+
                 $i=$x=0;
 
                 $nrules =$rule;
@@ -345,14 +351,14 @@ class SuricataController extends Controller
                 $larule = explode("\n",$ncontenido);
                 foreach ($larule as $unrule) {               
                         $i=$x=0;
-
-                        foreach ($contenido as $key ) {
-                            if($key==$rule){
-                                $x=$i;
+                        if($laz==0){
+                            foreach ($contenido as $key ) {
+                                if($key==$rule){
+                                    $x=$i;
+                                }
+                                $i++;
                             }
-                            $i++;
                         }
-
                         if($x>0){
                             unset($contenido[$x]);
                             $b = array_values($contenido);
