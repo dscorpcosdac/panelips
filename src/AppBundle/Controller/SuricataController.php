@@ -225,7 +225,7 @@ class SuricataController extends Controller
  //echo base64_decode($rule);
         return $this->render('AppBundle:suricata:edit.html.twig', array(
            'file'=>$file,
-           'rule'=>trim(utf8_encode((base64_decode($rule))).utf8_decode((base64_decode($rule)))), 
+           'rule'=>$rule.trim(utf8_encode((base64_decode($rule))).utf8_decode((base64_decode($rule)))), 
         ));
     }
 

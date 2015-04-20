@@ -359,7 +359,7 @@ foreach ($rules_map as $k1 => $rulem) {
 								$dato['rule']=$v['rule'];
 								$masked = $v['rule'];
 								//$masked = "U|".$v['rule']."|a|b";
-			                    $masked = base64_encode($masked);
+			                    $masked = base64_encode(utf8_encode($masked));
 			                    $masked = urlencode($masked);
 			                    $masked = preg_replace('/=$/','',$masked);
 			                    $dato['ruleencode'] = $masked;
