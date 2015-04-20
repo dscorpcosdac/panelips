@@ -26,6 +26,7 @@ class SuricataController extends Controller
         return $this->render('AppBundle:suricata:index.html.twig', array(
             'entities' => $procesoent['datos'],
             'archivo' => $archivo,
+            'sinnada' => $sinnada,
             'enabled' => $procesoent['enabled'],
             'disabled' => $procesoent['disabled'],
             'totalrules' => count($procesoent['datos']),
@@ -210,7 +211,7 @@ class SuricataController extends Controller
                 fclose($file);
             }
  
-        return $this->render('AppBundle:suricata:new.html.twig', array(
+        return $this->redirect($this->generateUrl('suricata-homepage'));
             
         ));
     }
@@ -252,9 +253,7 @@ class SuricataController extends Controller
                 fwrite($file, $rule . PHP_EOL);
                 fclose($file);
             }
-        return $this->render('AppBundle:suricata:new.html.twig', array(
-            
-        ));
+        return $this->redirect($this->generateUrl('suricata-homepage'));
     }
 
 

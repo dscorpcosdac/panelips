@@ -87,8 +87,8 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Listado de reglas</h5>
-                        {% if archivo == 'activo' %}
-                          <a href="{{path('maclist_new')}}"  style="margin-left: 70px;" class="btn btn-info btn-circle" title="Agregar producto">
+                        {% if sinnada == 'local.rules' %}
+                          <a href="{{path('rule_add')}}"  style="margin-left: 70px;" class="btn btn-info btn-circle" title="Agregar producto">
                                   <i class="fa fa-check"></i>
                              </a>   
                          {% endif %} 
@@ -130,8 +130,8 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <td>{{ entity.message }}</td>
                  <td>
                     <input type="hidden" name="txtElid" value="{{entity.id}}">
-                    {% if archivo == 'activo' %}
-                         <a href="javascrip:void(0)"  class="btn btn-info form_rule_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-edit"></i>
+                    {% if sinnada == 'local.rules' %}
+                         <a href="{{path('ruleEditAction',)}}"  class="btn btn-info form_rule_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-edit"></i>
                          </button>
                     {% endif %}
                      {% if entity.iconb == 'activo' %}
