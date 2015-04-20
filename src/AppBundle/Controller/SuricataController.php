@@ -401,9 +401,7 @@ class SuricataController extends Controller
             //unset($contenido[$puntero]);
 
               
-         $response = new Response(json_encode(array('funciono'=>true)));
-            $response->headers->set('Content-Type', 'application/json');
-            return $response;
+       return $this->redirect($this->generateUrl('suricata-homepage'));
       /*  }
         $response = new Response(json_encode(array('funciono'=>false)));
             $response->headers->set('Content-Type', 'application/json');
