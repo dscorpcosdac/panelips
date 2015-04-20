@@ -256,6 +256,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
         
     {% endblock %}    {% block js %}
     <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js')}}"></script>
+     <script src="{{ asset('bundles/app/js/plugins/chosen/chosen.jquery.js')}}"></script>
 <script type="text/javascript">
 
 
@@ -366,7 +367,7 @@ var config = {
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
-            
+
 $('#bodyPoliza').delegate('.form_rule_disable', 'click', function(event) {  
             event.preventDefault();
            // var $form = $( this );
