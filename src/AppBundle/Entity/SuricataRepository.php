@@ -17,6 +17,39 @@ class SuricataRepository extends EntityRepository
 		$rule_files = glob($rules_path . "*.rules");
 		return $rule_files;
 	}
+	function readRulesact(){
+		$rules_path ='/etc/nsm/rules/';
+		$rule_files = glob($rules_path . "*.rules");
+		$activoArchive=__DIR__.'/../../../web/rules/categoriaActiva.txt';
+                $archivo = $activoArchive;
+                $abrir = fopen($archivo,'r+');
+                 $i=$x=0;
+                 $partes=array();
+                if(filesize($archivo)>0){
+                        $contenido = fread($abrir,filesize($archivo));
+                        fclose($abrir);        
+                        $contenido = explode("\n",$contenido);
+
+                        foreach ($rule_files as $value) {
+	                      	foreach ($contenido as $key ) {
+	                      		$activo=0;
+	                      		if($key==$value){
+	                      			$activo=1;
+	                      		}
+	                      	}
+                        
+                        	$partes[]['activo']=$activo;
+                        	$partes[]['value']=$value;
+                    	}
+                }else{
+                	 foreach ($rule_files as $value) {
+                	 	$partes[]['activo']=0;
+                        $partes[]['value']=$value;
+                	 }
+                }
+               
+		return $partes;
+	}
 
 function suricata_load_rules_map($rules_path) {
 

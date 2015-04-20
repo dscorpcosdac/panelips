@@ -35,6 +35,7 @@ class SuricataController extends Controller
             'disabled' => $procesoent['disabled'],
             'totalrules' => count($procesoent['datos']),
             'archivos' => $em->getRepository('AppBundle:Suricata')->readRules(),
+            'archivoso' => $em->getRepository('AppBundle:Suricata')->readRulesact(),
         ));
     }
 
@@ -200,9 +201,7 @@ class SuricataController extends Controller
             fclose($puntero);
            
 	          
-            $response = new Response(json_encode(array('funciono'=>true)));
-            $response->headers->set('Content-Type', 'application/json');
-            return $response;
+           return $this->redirect($this->generateUrl('suricata-homepage'));
     }
 
         /**
