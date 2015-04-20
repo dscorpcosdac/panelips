@@ -255,6 +255,15 @@ class SuricataController extends Controller
             }
         return $this->redirect($this->generateUrl('suricata-homepage'));
     }
-
-
+ /**
+     * @Route("/chechSuricata", name="check_suricata")
+     */
+    public function chechSuricataAction()
+    {
+        $resultado=shell_exec('suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
+        echo $resultado;
+        $response = new Response(json_encode(array('funciono'=>true)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 }
