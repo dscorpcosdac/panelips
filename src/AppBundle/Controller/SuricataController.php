@@ -212,8 +212,7 @@ class SuricataController extends Controller
             }
  
         return $this->redirect($this->generateUrl('suricata-homepage'));
-            
-        ));
+        
     }
 
       /**
