@@ -34,13 +34,15 @@ class SuricataRepository extends EntityRepository
 	                      	foreach ($contenido as $conte ) {
 	                      		//echo '<pre>';
 	                      		//print_r( $conte );echo '</pre>';
-	                      		$activo=0;
+	                      		
 	                      		if($conte==$value){
 	                      			$activo=1;
+	                      		}else{
+	                      			$activo=0;
 	                      		}
 	                      	}
                         
-                        	$partes[]=array('value'=>$value,'activo'=>$activo);
+                        	$partes[]=array('value'=>$value,'conte'=>$conte,'activo'=>$activo);
                         	//$partes[]['value']=$value;
                     	}
                 }else{
