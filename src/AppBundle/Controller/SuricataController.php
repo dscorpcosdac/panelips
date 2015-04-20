@@ -345,6 +345,7 @@ class SuricataController extends Controller
                 $i=$x=0;
 
                 $nrules =$rule;
+                echo $nrules.filesize($nrules).'<br>';
                 if(filesize($nrules)>0){
                     $nabrir = fopen($nrules,'r+');
                     $ncontenido = fread($nabrir,filesize($nrules));
