@@ -276,6 +276,7 @@ class SuricataController extends Controller
             $nuevas=array();
             foreach ($contenido as $key ) {
                 if($key==$rulea){
+                    echo $key.$rulea;
                     $nuevas[]=$rule;
                     $x++;
                 }else{
@@ -290,7 +291,7 @@ class SuricataController extends Controller
                 fwrite($file, $otro . PHP_EOL);
                 fclose($file);
             }
-        return $this->redirect($this->generateUrl('suricata-homepage'));
+        //return $this->redirect($this->generateUrl('suricata-homepage'));
     }
     /**
      * @Route("/chechSuricata", name="check_suricata")
