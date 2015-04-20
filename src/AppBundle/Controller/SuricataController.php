@@ -64,17 +64,20 @@ class SuricataController extends Controller
     		$inactivoArchivo=__DIR__.'/../../../web/rules/enabled.txt';
     	}
     		$archivo = $activoArchive;
-            $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
-            fclose($abrir);        
-            $contenido = explode("\n",$contenido);
             $i=$x=0;
-	    	foreach ($contenido as $key ) {
-	    		if($key==$rule){
-	    			$x++;
-	    		}
-	    		
-	    	}
+            if(filesize($archivo)>0){
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir);        
+                $contenido = explode("\n",$contenido);
+                
+    	    	foreach ($contenido as $key ) {
+    	    		if($key==$rule){
+    	    			$x++;
+    	    		}
+    	    		
+    	    	}
+            }
 	    	if($x==0){
 	    		$file = fopen($archivo, "a");
 		        fwrite($file, $rule . PHP_EOL);
@@ -82,26 +85,29 @@ class SuricataController extends Controller
 	    	}
 
 	    	$archivo =$inactivoArchivo;
-            $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
-            fclose($abrir);        
-            $contenido = explode("\n",$contenido);
-            $i=$x=0;
-	    	foreach ($contenido as $key ) {
-	    		if($key==$rule){
-	    			$x=$i;
-	    		}
-	    		$i++;
-	    	}
-	    	if($x>0){
-	    		unset($contenido[$x]);
-	            $b = array_values($contenido);
-	            $otro = implode("\n",$b); 
-	            // Guardar Archivo
-	            $abrir = fopen($archivo,'w');
-	            fwrite($abrir,$otro);
-	            fclose($abrir);
-	    	}
+            if(filesize($archivo)>0){
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir);        
+                $contenido = explode("\n",$contenido);
+                $i=$x=0;
+    	    	foreach ($contenido as $key ) {
+    	    		if($key==$rule){
+    	    			$x=$i;
+    	    		}
+    	    		$i++;
+    	    	}
+
+    	    	if($x>0){
+    	    		unset($contenido[$x]);
+    	            $b = array_values($contenido);
+    	            $otro = implode("\n",$b); 
+    	            // Guardar Archivo
+    	            $abrir = fopen($archivo,'w');
+    	            fwrite($abrir,$otro);
+    	            fclose($abrir);
+    	    	}
+            }
 
 	    	//unset($contenido[$puntero]);
 
