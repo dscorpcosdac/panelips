@@ -19,7 +19,11 @@ class SuricataController extends Controller
         $sinnada=str_replace('/etc/nsm/rules/', '', $archivo);
        //$suricata= new Suricata();
        	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map($archivo);
-       	$rules=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../web/rules/elbueno.txt');
+        if($archivo==''){
+            $rules=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/local.rules');
+        }else{
+       	    $rules=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/rmkips.rules');
+       }
        //echo '<pre>';	print_r($entidades); echo '</pre>';
        $procesoent=$em->getRepository('AppBundle:Suricata')->rulestoArray($entidades, $rules[1]);
       // echo '<pre>';	print_r($procesoent); echo '</pre>';
@@ -125,7 +129,7 @@ class SuricataController extends Controller
     	//$disabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../rules/disabled.txt');
     		$activoArchive=__DIR__.'/../../../web/rules/enabled.txt';
     		$inactivoArchivo= __DIR__.'/../../../web/rules/disabled.txt';
-    		$elbueno= __DIR__.'/../../../web/rules/elbueno.txt';
+    		$elbueno= '/etc/nsm/rules/rmkips.rules';
 
     		$tactivos=fopen($elbueno,'r+');
             $rules = fread($tactivos,filesize($elbueno));
@@ -255,14 +259,35 @@ class SuricataController extends Controller
             }
         return $this->redirect($this->generateUrl('suricata-homepage'));
     }
- /**
+    /**
      * @Route("/chechSuricata", name="check_suricata")
      */
     public function chechSuricataAction()
     {
         $resultado=shell_exec('suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
+        //echo $resultado;
+        
+        $pos = strpos($resultado, 'ERRCODE');
+        if ($pos === false) {
+            $ok='true';
+        } else {
+           $ok='false';
+        }
+        $response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+     /**
+     * @Route("/restartSuricata", name="restart_suricata")
+     */
+    public function restartSuricataAction()
+    {
+        $resultado=shell_exec('kill -USR2 10238');
+        //echo $resultado;
+        
         echo $resultado;
-        $response = new Response(json_encode(array('funciono'=>true)));
+        $response = new Response(json_encode(array('funciono'=>$ok)));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }

@@ -63,10 +63,12 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Categorias</label>
                                 <div class="col-sm-10">
-                                    <select name="archivo">
+                                    <select name="archivo[]" data-placeholder="Selecciona una categoria..." class="chosen-select" multiple>
                                     {% for entity in archivos %}
-                                        <option value="{{entity}}" {% if entity == archivo %} selected="selected" {% endif %} >
-                                        {{entity|replace({'/etc/nsm/rules/': ''})}}</option>
+                                       {% if entity !='/etc/nsm/rules/rmkips.rules'  %}
+                                            <option value="{{entity}}" {% if entity == archivo %} selected="selected" {% endif %} >
+                                            {{entity|replace({'/etc/nsm/rules/': ''})}}</option>
+                                       {% endif %}
                                     {% endfor %}
                                     </select>
                                 </div>
@@ -81,9 +83,74 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     </div>
                  </div>
             </div>
-            
+                            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Controles</h5>
+                         
+                        <div class="ibox-tools">                         
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                                                     
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">   
+                       <div class="hr-line-dashed"></div>
+                        <div class="form-group">                           
+                            <button type="submit" class="btn btn-danger" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Aplicar</button> 
+                             <button type="button" class="btn btn-primary" id="btnPopDanger" data-toggle="modal" data-target="#myModal2">
+                               Comprobar
+                            </button>
+                            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content animated flipInY">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">Reporte de errores</h4>
+                                            
+                                        </div>
+                                        <div class="modal-body" id="ctnError">
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                  
+                        </div>
+                    
+                    </div>
+                 </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
+                <form method="POST" action="{{path('suricata-homepage')}}" >              
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Categorias</label>
+                                <div class="col-sm-10">
+                                    <select name="archivo">
+                                    {% for entity in archivos %}
+                                       {% if entity !='/etc/nsm/rules/rmkips.rules'  %}
+                                            <option value="{{entity}}" {% if entity == archivo %} selected="selected" {% endif %} >
+                                            {{entity|replace({'/etc/nsm/rules/': ''})}}</option>
+                                       {% endif %}
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">                           
+                            <a href="{{ path('homepage') }}" class="btn btn-w-m btn-warning"><i class="fa fa-warning"></i> Cancelar</a>
+                            <button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Buscar</button>                   
+                         </div>
+                    </form> 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Listado de reglas</h5>
@@ -360,6 +427,36 @@ $('#bodyPoliza').delegate('.form_transaccion_enable', 'click', function(event) {
 
           
         });
+
+function chekError(){
+     
+    $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    data: 'oper=1&rule='+elidtr ,
+                    url: url,
+                    beforeSend: function() {
+                       $('#preloader-formulario').show();             
+                    },
+                    success: function(response) {   
+                       // alert(response);
+                        $('#preloader-formulario').hide();  
+                        //$( "#bodyPoliza" ).append(response ); 
+                        if(response.funciono){
+                            $('#ctnError').html('Todo bien no existen errores');
+                        }else{
+                                                   
+                           $('#ctnError').html(response.error);
+                        }
+
+                            $('#btnPopDanger').click();                           
+                         
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {}
+                });
+}
+
+
  });
 
 
