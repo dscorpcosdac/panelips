@@ -448,7 +448,7 @@ function chekError(){
                     type: "POST",
                     dataType: "Json",
                     data: 'oper=1&rule=hola' ,
-                    url: url,
+                    url: "{{path('check_suricata')}}";
                     beforeSend: function() {
                        $('#preloader-formulario').show();             
                     },
