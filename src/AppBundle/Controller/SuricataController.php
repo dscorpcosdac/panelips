@@ -19,7 +19,7 @@ class SuricataController extends Controller
         $sinnada=str_replace('/etc/nsm/rules/', '', $archivo);
        //$suricata= new Suricata();
        	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map($archivo);
-        if($archivo==''){
+        if($archivo=='/etc/nsm/rules/local.rules'){
             $rules=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/local.rules');
         }else{
        	    $rules=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map('/etc/nsm/rules/rmkips.rules');
@@ -290,5 +290,77 @@ class SuricataController extends Controller
         $response = new Response(json_encode(array('funciono'=>$ok)));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
+    }
+
+    /**
+     * @Route("/ruleActiveMs", name="Actuve_Rulems")
+     */
+    public function ruleActiveMsAction()
+    {
+        ini_set('display_erros', -1);
+        //echo __DIR__.'/../../../web/rules/enabled.txt';
+        $em = $this->getDoctrine()->getManager();   
+        $rules=$this->get('request')->request->get('archivo', '');
+        $oper=$this->get('request')->request->get('oper', 1);
+        //$enabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../web/rules/enabled.txt');
+        //echo "<br>";print_r($enabled);echo "</pre>";
+print_r($rules);
+        //$disabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../rules/disabled.txt');
+        //if($rule==''){
+      /*      $rule=base64_decode($rule);
+            $rule=str_replace('#', '', $rule);
+           $activoArchive=__DIR__.'/../../../web/rules/enabled.txt';
+            $inactivoArchivo= __DIR__.'/../../../web/rules/disabled.txt';
+        
+            $archivo = $activoArchive;
+            $abrir = fopen($archivo,'r+');
+            $contenido = fread($abrir,filesize($archivo));
+            fclose($abrir);        
+            $contenido = explode("\n",$contenido);
+            $i=$x=0;
+            foreach ($contenido as $key ) {
+                if($key==$rule){
+                    $x++;
+                }
+                
+            }
+            if($x==0){
+                $file = fopen($archivo, "a");
+                fwrite($file, $rule . PHP_EOL);
+                fclose($file);
+            }
+
+            $archivo =$inactivoArchivo;
+            $abrir = fopen($archivo,'r+');
+            $contenido = fread($abrir,filesize($archivo));
+            fclose($abrir);        
+            $contenido = explode("\n",$contenido);
+            $i=$x=0;
+            foreach ($contenido as $key ) {
+                if($key==$rule){
+                    $x=$i;
+                }
+                $i++;
+            }
+            if($x>0){
+                unset($contenido[$x]);
+                $b = array_values($contenido);
+                $otro = implode("\n",$b); 
+                // Guardar Archivo
+                $abrir = fopen($archivo,'w');
+                fwrite($abrir,$otro);
+                fclose($abrir);
+            }
+*/
+            //unset($contenido[$puntero]);
+
+              
+         $response = new Response(json_encode(array('funciono'=>true)));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+      /*  }
+        $response = new Response(json_encode(array('funciono'=>false)));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;*/
     }
 }
