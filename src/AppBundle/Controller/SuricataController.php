@@ -313,16 +313,17 @@ class SuricataController extends Controller
         
                 $archivo = $activoArchive;
                 $abrir = fopen($archivo,'r+');
-                echo $archivo.filesize($archivo);
-                $contenido = fread($abrir,filesize($archivo));
-                fclose($abrir);        
-                $contenido = explode("\n",$contenido);
-                $i=$x=0;
-                foreach ($contenido as $key ) {
-                    if($key==$rule){
-                        $x++;
+                 $i=$x=0;
+                if(filesize($archivo)>0){
+                        $contenido = fread($abrir,filesize($archivo));
+                        fclose($abrir);        
+                        $contenido = explode("\n",$contenido);
+                      foreach ($contenido as $key ) {
+                        if($key==$rule){
+                            $x++;
+                        }
+                        
                     }
-                    
                 }
                 if($x==0){
                     $file = fopen($archivo, "a");
