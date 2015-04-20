@@ -313,7 +313,7 @@ class SuricataController extends Controller
         
                 $archivo = $activoArchive;
                 $abrir = fopen($archivo,'r+');
-                echo $archivo;
+                echo $archivo.filesize($archivo);
                 $contenido = fread($abrir,filesize($archivo));
                 fclose($abrir);        
                 $contenido = explode("\n",$contenido);
