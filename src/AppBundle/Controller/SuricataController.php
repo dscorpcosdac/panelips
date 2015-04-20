@@ -232,7 +232,7 @@ class SuricataController extends Controller
     public function ruleCreateAction()
     {
         $rule=$this->get('request')->request->get('rule', '');
-        $file=$this->get('request')->request->get('file', '');
+        $file=$this->get('request')->request->get('file', '/etc/nsm/rules/local.rules');
        
             $archivo = $file;
             $abrir = fopen($archivo,'r+');
