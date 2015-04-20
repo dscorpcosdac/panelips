@@ -319,7 +319,7 @@ foreach ($rules_map as $k1 => $rulem) {
 									$textss= $dato['textss'] = "<span class=\"gray\">";
 									$dato['textse'] = "</span>";
 									$dato['iconb'] = "inactivo";
-									echo $dato['iconb'];
+									//echo $dato['iconb'];
 									$disable_cnt++;
 									$dato['title'] = gettext("Disabled by default. Click to toggle to enabled state");
 								}
@@ -359,12 +359,12 @@ foreach ($rules_map as $k1 => $rulem) {
 								$dato['rule']=$v['rule'];
 								$masked = $v['rule'];
 								//$masked = "U|".$v['rule']."|a|b";
-								echo $v['rule'].'<br>';
+								//echo $v['rule'].'<br>';
 
 			                    $masked = base64_encode($masked);
-			                    echo  $masked .'<br>';
+			                    //echo  $masked .'<br>';
 			                    $masked = urlencode($masked);
-			                    echo  $masked .'<br>';
+			                    //echo  $masked .'<br>';
 			                    $masked = preg_replace('/=$/','',$masked);
 			                    $dato['ruleencode'] = $masked;
 							$datos[]=$dato;
