@@ -356,6 +356,7 @@ foreach ($rules_map as $k1 => $rulem) {
 								$dato['destination_port'] = $rule_content[6]; //destination port field
 								$dato['message'] = $this->suricata_get_msg($v['rule']);
 								//$dato['sid_tooltip'] = gettext("View the raw text for this rule");
+								$dato['rule']=$v['rule'];
 								$masked = $v['rule'];
 								//$masked = "U|".$v['rule']."|a|b";
 			                    $masked = base64_encode($masked);
