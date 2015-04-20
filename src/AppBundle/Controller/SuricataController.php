@@ -129,8 +129,22 @@ class SuricataController extends Controller
     	//$disabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../rules/disabled.txt');
     		$activoArchive=__DIR__.'/../../../web/rules/enabled.txt';
     		$inactivoArchivo= __DIR__.'/../../../web/rules/disabled.txt';
+            $ctxarchivos= __DIR__.'/../../../web/rules/pendientesCategorias.txt';
     		$elbueno= '/etc/nsm/rules/rmkips.rules';
+//$puntero = fopen ($rutaAFichero, "w+");
+            if(filesize($ctxarchivos)){
+                $tactivos=fopen($ctxarchivos,'r+');
+                $rulesxarch = fread($tactivos,filesize($ctxarchivos));
+                fclose($tactivos);
 
+                $abrir = fopen($elbueno,'w+');
+                fwrite($abrir,$rulesxarch);
+                fclose($abrir);
+
+                $puntero = fopen ($ctxarchivos, "w+");
+                fclose($puntero);
+
+            }
     		$tactivos=fopen($elbueno,'r+');
             $rules = fread($tactivos,filesize($elbueno));
             fclose($tactivos);        
@@ -176,11 +190,15 @@ class SuricataController extends Controller
 	    	$b = array_values($rules);
             $otro = implode("\n",$b); 
             // Guardar Archivo
-            $abrir = fopen($elbueno,'w');
+            $abrir = fopen($elbueno,'a');
             fwrite($abrir,$otro);
             fclose($abrir);
 	    	//unset($contenido[$puntero]);
-
+            $puntero = fopen ($activoArchive, "w+");
+            fclose($puntero);
+            $puntero = fopen ($inactivoArchivo, "w+");
+            fclose($puntero);
+           
 	          
             $response = new Response(json_encode(array('funciono'=>true)));
             $response->headers->set('Content-Type', 'application/json');
