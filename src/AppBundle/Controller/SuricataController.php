@@ -276,7 +276,7 @@ class SuricataController extends Controller
             $nuevas=array();
             foreach ($contenido as $key ) {
                 if($key==$rulea){
-                    echo '|'.$key.'|'.$rulea.'|';
+                   // echo '|'.$key.'|'.$rulea.'|';
                     $nuevas[]=$rule;
                     $x++;
                 }else{
@@ -284,7 +284,7 @@ class SuricataController extends Controller
                 }
                 
             }
-            if($x==0){
+            if($x>0){
                 $b = array_values($nuevas);
                 $otro = implode("\n",$b); 
                 $file = fopen($archivo, "w+");
