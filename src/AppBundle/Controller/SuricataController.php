@@ -345,7 +345,7 @@ class SuricataController extends Controller
                 $i=$x=0;
 
                 $nrules =$rule;
-                echo $nrules.filesize($nrules).'<br>';
+                echo $nrules.filesize($nrules).'';
                 if(filesize($nrules)>0){
                     $nabrir = fopen($nrules,'r+');
                     $ncontenido = fread($nabrir,filesize($nrules));
@@ -355,20 +355,17 @@ class SuricataController extends Controller
                             $i=$x=0;
                             if($laz==0){
                                 foreach ($contenido as $key ) {
-                                    if($key==$rule){
-                                        $x=$i;
+                                    if($key==$unrule){
+                                        $x++;
                                     }
-                                    $i++;
+                                    
                                 }
-                            }
-                            if($x>0){
-                                unset($contenido[$x]);
-                                $b = array_values($contenido);
-                                $otro = implode("\n",$b); 
-                                // Guardar Archivo
-                                $abrir = fopen($archivo,'w');
-                                fwrite($abrir,$otro);
-                                fclose($abrir);
+                            }else{
+                                if($x==0){
+                                    $file = fopen($archivo, "a");
+                                    fwrite($file, $unrule . PHP_EOL);
+                                    fclose($file);
+                                }
                             }
                     }
                 }
