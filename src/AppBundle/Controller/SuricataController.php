@@ -276,7 +276,7 @@ class SuricataController extends Controller
             $nuevas=array();
             foreach ($contenido as $key ) {
                 if($key==$rulea){
-                    echo $key.$rulea;
+                    echo '|'.$key.'|'.$rulea.'|';
                     $nuevas[]=$rule;
                     $x++;
                 }else{
