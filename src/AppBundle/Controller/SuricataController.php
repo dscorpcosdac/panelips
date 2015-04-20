@@ -265,7 +265,7 @@ class SuricataController extends Controller
         $rule=$this->get('request')->request->get('rule', '');
         $rulea=$this->get('request')->request->get('rulea', '');
         $file=$this->get('request')->request->get('file', ''); 
-        $rulea =>trim( base64_decode(urldecode($rule))),
+        $rulea =trim(base64_decode(urldecode($rulea))),
 
         $archivo = '/etc/nsm/rules/'.$file;
             $abrir = fopen($archivo,'r+');
