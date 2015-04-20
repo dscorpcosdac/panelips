@@ -32,8 +32,8 @@ class SuricataRepository extends EntityRepository
 //print_r( $contenido );
                         foreach ($rule_files as $value) {
 	                      	foreach ($contenido as $conte ) {
-	                      		//echo $conte.$conte;
-	                      		print_r( $conte );
+	                      		echo '<pre>';
+	                      		print_r( $conte );echo '</pre>';
 	                      		$activo=0;
 	                      		if($conte==$value){
 	                      			$activo=1;
