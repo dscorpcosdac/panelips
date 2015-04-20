@@ -307,51 +307,60 @@ class SuricataController extends Controller
 print_r($rules);
         //$disabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../rules/disabled.txt');
         //if($rule==''){
-      /*      $rule=base64_decode($rule);
-            $rule=str_replace('#', '', $rule);
-           $activoArchive=__DIR__.'/../../../web/rules/enabled.txt';
-            $inactivoArchivo= __DIR__.'/../../../web/rules/disabled.txt';
+        $activoArchive=__DIR__.'/../../../web/rules/categoriaActiva.txt';
+        $inactivoArchivo= __DIR__.'/../../../web/rules/pendientesCategorias.txt';
+        foreach ($rules as $rule) {             
         
-            $archivo = $activoArchive;
-            $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
-            fclose($abrir);        
-            $contenido = explode("\n",$contenido);
-            $i=$x=0;
-            foreach ($contenido as $key ) {
-                if($key==$rule){
-                    $x++;
+                $archivo = $activoArchive;
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir);        
+                $contenido = explode("\n",$contenido);
+                $i=$x=0;
+                foreach ($contenido as $key ) {
+                    if($key==$rule){
+                        $x++;
+                    }
+                    
                 }
-                
-            }
-            if($x==0){
-                $file = fopen($archivo, "a");
-                fwrite($file, $rule . PHP_EOL);
-                fclose($file);
-            }
+                if($x==0){
+                    $file = fopen($archivo, "a");
+                    fwrite($file, $rule . PHP_EOL);
+                    fclose($file);
+                }
 
-            $archivo =$inactivoArchivo;
-            $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
-            fclose($abrir);        
-            $contenido = explode("\n",$contenido);
-            $i=$x=0;
-            foreach ($contenido as $key ) {
-                if($key==$rule){
-                    $x=$i;
+                $archivo =$inactivoArchivo;
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir);        
+                $contenido = explode("\n",$contenido);
+                $i=$x=0;
+
+                $nrules =$rule;
+                $nabrir = fopen($nrules,'r+');
+                $ncontenido = fread($nrules,filesize($rule));
+                fclose($nabrir);        
+                $larule = explode("\n",$ncontenido);
+                foreach ($larule as $unrule) {               
+                        $i=$x=0;
+
+                        foreach ($contenido as $key ) {
+                            if($key==$rule){
+                                $x=$i;
+                            }
+                            $i++;
+                        }
+                        if($x>0){
+                            unset($contenido[$x]);
+                            $b = array_values($contenido);
+                            $otro = implode("\n",$b); 
+                            // Guardar Archivo
+                            $abrir = fopen($archivo,'w');
+                            fwrite($abrir,$otro);
+                            fclose($abrir);
+                        }
                 }
-                $i++;
-            }
-            if($x>0){
-                unset($contenido[$x]);
-                $b = array_values($contenido);
-                $otro = implode("\n",$b); 
-                // Guardar Archivo
-                $abrir = fopen($archivo,'w');
-                fwrite($abrir,$otro);
-                fclose($abrir);
-            }
-*/
+        }
             //unset($contenido[$puntero]);
 
               

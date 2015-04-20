@@ -373,5 +373,25 @@ foreach ($rules_map as $k1 => $rulem) {
 return array('datos'=>$datos,'enabled'=>$enable_cnt,'disabled'=>$disable_cnt);
 
 }
+function rulestomapArray($rules_map){
+	$datos = array();
+	$counter = $enable_cnt = $disable_cnt = $user_enable_cnt = $user_disable_cnt = $managed_count = 0;
+	//echo '<pre>';print_r($rules_map );echo '</pre>';
+foreach ($rules_map as $k1 => $rulem) {
+							foreach ($rulem as $k2 => $v) {
+								$sid = $this->suricata_get_sid($v['rule']);
+								$dato['id']=$sid;
+								$gid = $this->suricata_get_gid($v['rule']);
+								
+								if ($v['disabled'] != 1) {
+									$dato['rule']=$v['rule'];
+								}
+								
+								
+								
+						}
+					}
+return array('datos'=>$datos,'enabled'=>$enable_cnt,'disabled'=>$disable_cnt);
 
+}
 }
