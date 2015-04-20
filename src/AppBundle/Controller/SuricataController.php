@@ -222,10 +222,10 @@ class SuricataController extends Controller
     {
              $rule=$this->get('request')->request->get('rule', '');
         $file=$this->get('request')->request->get('file', '');  
- echo base64_decode($rule);
+ //echo base64_decode($rule);
         return $this->render('AppBundle:suricata:edit.html.twig', array(
            'file'=>$file,
-           'rule'=>trim(base64_decode($rule)), 
+           'rule'=>trim(utf8_encode(base64_decode($rule))), 
         ));
     }
 
