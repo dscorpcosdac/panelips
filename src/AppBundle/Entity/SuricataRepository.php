@@ -48,8 +48,7 @@ class SuricataRepository extends EntityRepository
                         //$partes[]['value']=$value;
                 	 }
                 }
-               echo '<pre>';
-	                      		print_r( $partes );echo '</pre>';
+              
 		return $partes;
 	}
 
