@@ -247,7 +247,7 @@ class SuricataController extends Controller
      */
     public function ruleEditAction()
     {
-             $rule=$this->get('request')->request->get('rule', '');
+        $rule=$this->get('request')->request->get('rule', '');
         $file=$this->get('request')->request->get('file', '');  
  //echo base64_decode($rule);
         return $this->render('AppBundle:suricata:edit.html.twig', array(
@@ -265,7 +265,7 @@ class SuricataController extends Controller
         $rule=$this->get('request')->request->get('rule', '');
         $rulea=$this->get('request')->request->get('rulea', '');
         $file=$this->get('request')->request->get('file', ''); 
-        $rulea =trim(base64_decode(urldecode($rulea))),
+        $rulea =trim(base64_decode(urldecode($rulea)));
 
         $archivo = '/etc/nsm/rules/'.$file;
             $abrir = fopen($archivo,'r+');
