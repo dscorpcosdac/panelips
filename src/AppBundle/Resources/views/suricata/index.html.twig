@@ -87,9 +87,11 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Listado de reglas</h5>
+                        {% if archivo == 'activo' %}
                           <a href="{{path('maclist_new')}}"  style="margin-left: 70px;" class="btn btn-info btn-circle" title="Agregar producto">
                                   <i class="fa fa-check"></i>
-                             </a>    
+                             </a>   
+                         {% endif %} 
                         <div class="ibox-tools">                         
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -128,15 +130,21 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <td>{{ entity.message }}</td>
                  <td>
                     <input type="hidden" name="txtElid" value="{{entity.id}}">
-                     <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
-                     </button>
-                    
+                    {% if archivo == 'activo' %}
+                         <a href="javascrip:void(0)"  class="btn btn-info form_rule_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-edit"></i>
+                         </button>
+                    {% endif %}
                      {% if entity.iconb == 'activo' %}
-                        <button type="submit" class="btn  form_transaccion_delete" entidad="{{entity.id}}" title="Desactivar Entrada"><i class="fa fa-trash-o"></i>
-                         </button>
-                        {% else %}
-                         <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" title="Desactivar Entrada"><i class="fa fa-trash-o"></i>
-                         </button>
+                        <a href="javascrip:void(0)" class="btn btn-danger form_rule_disable" entidad="{{entity.ruleencode}}" title="Desactivar Entrada"><i class="fa fa-minus-square-o"></i>
+                         </a>
+                     {% endif %}
+                     {% if entity.iconb == 'pendiente' %}
+                         <a href="javascrip:void(0)" class="btn form_transaccion_delete" entidad="{{entity.ruleencode}}" title="Pendiente de cambios"><i class="fa fa-clock-o"></i>
+                         </a>
+                    {% endif %} 
+                    {% if entity.iconb == 'inactivo' %}
+                         <a href="javascrip:void(0)" h="dfg" class="btn form_transaccion_enable" entidad="{{entity.ruleencode}}" title="Activar Entrada"><i class="fa fa-check-square-o"></i>
+                         </a>
                     {% endif %} 
                
                 </td>
@@ -146,17 +154,21 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
         </tbody>
      <tfoot>
              <tr>
-               <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
-                <th>MAC</th>
-                <th>IP ADDRESSES</th>
+              <th>Id</th>
+                <th>Protocolo</th>
+                <th>Source</th>
+                <th>Source - Port</th>
+                <th>Destination</th>
+                <th>Destination - Port</th>
+                <th>Message</th>
                 <th>Actions</th>
             </tr>
             <tr>
                <th>Total Reglas: {{totalrules}}</th>
                 <th>Activas: {{enabled}}</th>
                 <th>Inactivas: {{disabled}}</th>
+                <th></th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -271,19 +283,17 @@ $('.datatable').dataTable({
             }
         } );
 $( document ).ready(function() {
-$('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {  
+$('#bodyPoliza').delegate('.form_rule_disable', 'click', function(event) {  
             event.preventDefault();
            // var $form = $( this );
-            url = "{{path('maclist_update')}}";
+            url = "{{path('Actuve_Rule')}}";
             elidtr = $( this ).attr( "entidad" );
             var data;
-            $('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
-                   data+='&'+ $(this).attr('name')+'='+ $(this).val();
-                });
+           elemento=$( this );
             $.ajax({
                     type: "POST",
                     dataType: "Json",
-                    data: data ,
+                    data: 'oper=2&rule='+elidtr ,
                     url: url,
                     beforeSend: function() {
                        $('#preloader-formulario').show();             
@@ -294,7 +304,9 @@ $('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {
                         if(!response.funciono){
                             alert("ocurrio un error por favor verifica tus datos");
                         }else{
-                            alert("el registro se modifico correctamente");
+                           elemento.removeClass('form_rule_disable');
+                           elemento.addClass('form_transaccion_delete');
+                           elemento.html('<i class="fa fa-clock-o">');
                         }
                          
                         //$('#ctnTr' + elidtr).replaceWith(response.ctnhtml);                                  
@@ -305,7 +317,46 @@ $('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {
 
           
         });
-$('#bodyPoliza').delegate('.form_transaccion_delete', 'click', function(event) {  
+$('#bodyPoliza').delegate('.form_transaccion_enable', 'click', function(event) {  
+            event.preventDefault();
+              url = "{{path('Actuve_Rule')}}";
+            elidtr = $( this ).attr( "entidad" );
+            elemento=$( this );
+            var data;
+           
+            $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    data: 'oper=1&rule='+elidtr ,
+                    url: url,
+                    beforeSend: function() {
+                       $('#preloader-formulario').show();             
+                    },
+                    success: function(response) {   
+                       // alert(response);
+                        $('#preloader-formulario').hide();  
+                        //$( "#bodyPoliza" ).append(response ); 
+                        if(!response.funciono){
+                            alert("ocurrio un error por favor verifica tus datos");
+                        }else{
+                           // $('#ctnTr' + elidtr).remove();
+                           // $('hdnIdtran_' + elidtr).remove();
+                           //console.log(elemento.attr( "h" ));
+                           elemento.removeClass('form_transaccion_enable');
+                           elemento.addClass('form_transaccion_delete');
+                           elemento.html('<i class="fa fa-clock-o">');
+                        }
+
+                                                       
+                         
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {}
+                });
+
+          
+        });
+ });
+$('#bodyPoliza').delegate('.form_rule_edit', 'click', function(event) {  
             event.preventDefault();
             if(confirm("Esta seguro que desea eliminar este elemento!")){
                 document.getElementById('cualid').value=$( this ).attr( "entidad" );
@@ -339,7 +390,7 @@ $('#bodyPoliza').delegate('.form_transaccion_delete', 'click', function(event) {
 */
           
         });
- });
+
 function exportar(){
     $('#hrExport').click();
 }

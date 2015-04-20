@@ -270,12 +270,26 @@ function suricata_get_msg($rule) {
 function rulestoArray($rules_map,$currentruleset){
 	$datos = array();
 	$counter = $enable_cnt = $disable_cnt = $user_enable_cnt = $user_disable_cnt = $managed_count = 0;
+	//echo '<pre>';print_r($rules_map );echo '</pre>';
 foreach ($rules_map as $k1 => $rulem) {
 							foreach ($rulem as $k2 => $v) {
 								$sid = $this->suricata_get_sid($v['rule']);
 								$dato['id']=$sid;
 								$gid = $this->suricata_get_gid($v['rule']);
-								$ruleset = $currentruleset;
+								foreach ($currentruleset as $key) {
+									$osid = $this->suricata_get_sid($key['rule']);
+									if($sid!=$osid)
+									{
+										//echo $sid.'=='.$osid.'<br>';
+										if($v['disabled']==0){
+											$v['disabled']=1;
+										}
+									}
+									# code...
+								}
+								//echo '<pre>';print_r($rules_map );echo '</pre>'
+								
+								//$ruleset = $currentruleset;
 								$style = "";
 							/*	print_r($v);
 								if ($v['managed'] == 1) {
@@ -301,14 +315,15 @@ foreach ($rules_map as $k1 => $rulem) {
 									$user_disable_cnt++;
 									$dato['title'] = gettext("Disabled by user. Click to toggle to enabled state");
 								}*/
-								if (($v['disabled'] == 1) && (!isset($enablesid[$gid][$sid]))) {
+								if ($v['disabled'] == 1) {
 									$textss= $dato['textss'] = "<span class=\"gray\">";
 									$dato['textse'] = "</span>";
 									$dato['iconb'] = "inactivo";
+									echo $dato['iconb'];
 									$disable_cnt++;
 									$dato['title'] = gettext("Disabled by default. Click to toggle to enabled state");
 								}
-								elseif (isset($enablesid[$gid][$sid])) {
+								elseif ($v['disabled'] == 0) {
 									$textss= $dato['textss'] = $textse = "";
 									$dato['iconb'] = "activo";
 									$enable_cnt++;
@@ -341,6 +356,12 @@ foreach ($rules_map as $k1 => $rulem) {
 								$dato['destination_port'] = $rule_content[6]; //destination port field
 								$dato['message'] = $this->suricata_get_msg($v['rule']);
 								//$dato['sid_tooltip'] = gettext("View the raw text for this rule");
+								$masked = $v['rule'];
+								//$masked = "U|".$v['rule']."|a|b";
+			                    $masked = base64_encode($masked);
+			                    $masked = urlencode($masked);
+			                    $masked = preg_replace('/=$/','',$masked);
+			                    $dato['ruleencode'] = $masked;
 							$datos[]=$dato;
 						}
 					}

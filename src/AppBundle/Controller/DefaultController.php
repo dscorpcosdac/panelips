@@ -173,9 +173,9 @@ class DefaultController extends Controller
      */
     public function maclistcreateAction()
     {
-         $archivo = '/etc/shorewall/maclist';
+        $archivo = '/etc/shorewall/maclist';
         $file = fopen($archivo, "a");
-         $txtAction=$this->get('request')->request->get('txtAction', '');
+        $txtAction=$this->get('request')->request->get('txtAction', '');
             $txtMac=$this->get('request')->request->get('txtMac', '');
             $txtIp=$this->get('request')->request->get('txtIp', '');
             $txtInterface=$this->get('request')->request->get('txtInterface', '');
