@@ -304,7 +304,7 @@ class SuricataController extends Controller
         $oper=$this->get('request')->request->get('oper', 1);
         //$enabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../web/rules/enabled.txt');
         //echo "<br>";print_r($enabled);echo "</pre>";
-print_r($rules);
+//print_r($rules);
         //$disabled=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map(__DIR__.'/../../../rules/disabled.txt');
         //if($rule==''){
         $activoArchive=__DIR__.'/../../../web/rules/categoriaActiva.txt';
@@ -313,6 +313,7 @@ print_r($rules);
         
                 $archivo = $activoArchive;
                 $abrir = fopen($archivo,'r+');
+                echo $archivo;
                 $contenido = fread($abrir,filesize($archivo));
                 fclose($abrir);        
                 $contenido = explode("\n",$contenido);
@@ -350,6 +351,7 @@ print_r($rules);
                             }
                             $i++;
                         }
+
                         if($x>0){
                             unset($contenido[$x]);
                             $b = array_values($contenido);
