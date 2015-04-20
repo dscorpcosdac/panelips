@@ -231,7 +231,7 @@ class SuricataController extends Controller
      /**
      * @Route("/ruleUpdate", name="rule_update")
      */
-    public function ruleEditAction()
+    public function ruleUpdateAction()
     {
         $rule=$this->get('request')->request->get('rule', '');
         $file=$this->get('request')->request->get('file', '');       
