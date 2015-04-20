@@ -345,29 +345,31 @@ class SuricataController extends Controller
                 $i=$x=0;
 
                 $nrules =$rule;
-                $nabrir = fopen($nrules,'r+');
-                $ncontenido = fread($nrules,filesize($rule));
-                fclose($nabrir);        
-                $larule = explode("\n",$ncontenido);
-                foreach ($larule as $unrule) {               
-                        $i=$x=0;
-                        if($laz==0){
-                            foreach ($contenido as $key ) {
-                                if($key==$rule){
-                                    $x=$i;
+                if(filesize($nrules)>0){
+                    $nabrir = fopen($nrules,'r+');
+                    $ncontenido = fread($nabrir,filesize($nrules));
+                    fclose($nabrir);        
+                    $larule = explode("\n",$ncontenido);
+                    foreach ($larule as $unrule) {               
+                            $i=$x=0;
+                            if($laz==0){
+                                foreach ($contenido as $key ) {
+                                    if($key==$rule){
+                                        $x=$i;
+                                    }
+                                    $i++;
                                 }
-                                $i++;
                             }
-                        }
-                        if($x>0){
-                            unset($contenido[$x]);
-                            $b = array_values($contenido);
-                            $otro = implode("\n",$b); 
-                            // Guardar Archivo
-                            $abrir = fopen($archivo,'w');
-                            fwrite($abrir,$otro);
-                            fclose($abrir);
-                        }
+                            if($x>0){
+                                unset($contenido[$x]);
+                                $b = array_values($contenido);
+                                $otro = implode("\n",$b); 
+                                // Guardar Archivo
+                                $abrir = fopen($archivo,'w');
+                                fwrite($abrir,$otro);
+                                fclose($abrir);
+                            }
+                    }
                 }
         }
             //unset($contenido[$puntero]);
