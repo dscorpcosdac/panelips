@@ -216,7 +216,7 @@ class SuricataController extends Controller
     }
 
       /**
-     * @Route("/ruleEdit/{$file}/{$rule}", name="rule_edit")
+     * @Route("/ruleEdit/{file}/{rule}", name="rule_edit")
      */
     public function ruleEditAction($file,$rule)
     {
