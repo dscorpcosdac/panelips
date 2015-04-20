@@ -178,31 +178,33 @@ class SuricataController extends Controller
                 $rules=array();
             }
 	    	$archivo =$activoArchive;
-            $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
-            fclose($abrir);        
-            $contenido = explode("\n",$contenido);
-            $i=$x=0;
-            
-	    	foreach ($contenido as $key ) {
-	    		$Nrules=array();$x=0;
-	    		foreach ($rules as $rule ) {
-		    		if($key!=$rule){
-		    			$Nrules[]=$rule;
-		    		}
-	    		}
-	    			$Nrules[]=$key;
-	    		
-	    		$rules=$Nrules;
-	    		//print_r($rules);
-	    	}
-	    	
-	    	$b = array_values($rules);
-            $otro = implode("\n",$b); 
-            // Guardar Archivo
-            $abrir = fopen($elbueno,'a');
-            fwrite($abrir,$otro);
-            fclose($abrir);
+            if(filesize($archivo)>0){
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir);        
+                $contenido = explode("\n",$contenido);
+                $i=$x=0;
+                
+    	    	foreach ($contenido as $key ) {
+    	    		$Nrules=array();$x=0;
+    	    		foreach ($rules as $rule ) {
+    		    		if($key!=$rule){
+    		    			$Nrules[]=$rule;
+    		    		}
+    	    		}
+    	    			$Nrules[]=$key;
+    	    		
+    	    		$rules=$Nrules;
+    	    		//print_r($rules);
+    	    	}
+    	    	
+    	    	$b = array_values($rules);
+                $otro = implode("\n",$b); 
+                // Guardar Archivo
+                $abrir = fopen($elbueno,'a');
+                fwrite($abrir,$otro);
+                fclose($abrir);
+            }
 	    	//unset($contenido[$puntero]);
             $puntero = fopen ($activoArchive, "w+");
             fclose($puntero);
