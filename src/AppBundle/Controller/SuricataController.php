@@ -15,7 +15,7 @@ class SuricataController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();	
-        $archivo=$this->get('request')->request->get('archivo', '/etc/nsm/rules/localb.rules');
+        $archivo=$this->get('request')->request->get('archivo', '/etc/nsm/rules/local.rules');
         $sinnada=str_replace('/etc/nsm/rules/', '', $archivo);
        //$suricata= new Suricata();
        	$entidades=$em->getRepository('AppBundle:Suricata')->suricata_load_rules_map($archivo);
@@ -225,7 +225,7 @@ class SuricataController extends Controller
  //echo base64_decode($rule);
         return $this->render('AppBundle:suricata:edit.html.twig', array(
            'file'=>$file,
-           'rule'=>base64_decode($rule).trim(utf8_encode((base64_decode($rule))).utf8_decode((base64_decode($rule)))), 
+           'rule'=>trim( base64_decode(urldecode($rule))), 
         ));
     }
 
