@@ -68,7 +68,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                                     {% for entity in archivoso %}
                                        {% if entity.value !='/etc/nsm/rules/rmkips.rules' or entity.value !='/etc/nsm/rules/local.rules'  %}
                                             <option value="{{entity}}" {% if entity.activo == 1 %} selected="selected" {% endif %} >
-                                            {{entity|replace({'/etc/nsm/rules/': ''})}}</option>
+                                            {{entity.value|replace({'/etc/nsm/rules/': ''})}}</option>
                                        {% endif %}
                                     {% endfor %}
                                     </select>
@@ -77,7 +77,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
 
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">                           
-                            <a href="{{ path('homepage') }}" class="btn btn-w-m btn-warning"><i class="fa fa-warning"></i> Cancelar</a>
+                            
                             <button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Buscar</button>                   
                          </div>
                     </form>  
