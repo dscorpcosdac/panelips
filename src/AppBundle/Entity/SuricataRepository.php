@@ -29,10 +29,10 @@ class SuricataRepository extends EntityRepository
                         $contenido = fread($abrir,filesize($archivo));
                         fclose($abrir);        
                         $contenido = explode("\n",$contenido);
-print_r( $contenido );
+//print_r( $contenido );
                         foreach ($rule_files as $value) {
 	                      	foreach ($contenido as $conte ) {
-	                      		echo $conte.$key;
+	                      		echo $conte.$conte;
 	                      		print_r( $conte );
 	                      		$activo=0;
 	                      		if($conte==$value){
