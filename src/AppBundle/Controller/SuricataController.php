@@ -303,7 +303,7 @@ class SuricataController extends Controller
      */
     public function chechSuricataAction()
     {
-        ini_set('display_errors', -1);
+        //ini_set('display_errors', -1);
         $resultado=system('sudo check_suricata');
         $archivo='/var/log/suricata.log';
         $elbueno='/var/log/nsm/ips-br0/suricata.log';
