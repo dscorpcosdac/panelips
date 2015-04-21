@@ -324,12 +324,12 @@ class SuricataController extends Controller
 
             }
 
-echo $resultado;
+//echo $resultado;
         
        
-        //7$response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
-        //$response->headers->set('Content-Type', 'application/json');
-        $response=new Response();
+        $response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
+        $response->headers->set('Content-Type', 'application/json');
+       // $response=new Response();
         return $response;
     }
 
