@@ -101,7 +101,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     </div>
                     <div class="ibox-content">   
                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">     
+                        <div class="form-group" id="ctnActions">     
                         <form method="post" action="{{path('Apply_Changes')}}">                      
                             <button type="submit" class="btn btn-danger" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Aplicar</button> 
                         </form>
@@ -472,7 +472,7 @@ function chekError(){
                 });
 }
 //btnPopDanger
-$('#bodyPoliza').delegate('#btnPopDanger', 'click', function(event) {  
+$('#ctnActions').delegate('#btnPopDanger', 'click', function(event) {  
 chekError();
 })
 chekError();
