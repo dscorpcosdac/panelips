@@ -308,16 +308,21 @@ class SuricataController extends Controller
         $resultado=shell_exec('more /var/www/panelips/web/rules/local.txt');
         echo "<pre>$resultado</pre>";
          $em = $this->getDoctrine()->getManager();
+         echo '</br>';echo '</br>';echo '</br>';echo '</br>';echo '</br>';echo '</br>';
         $entidades=$em->getRepository('AppBundle:Suricata')->mwexec_bg('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
         echo $entidades;
+        echo '</br>';
+echo '</br>';echo '</br>';echo '</br>';echo '</br>';
+        echo shell_exec('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
         $pos = strpos($resultado, 'ERRCODE');
         if ($pos === false) {
             $ok='true';
         } else {
            $ok='false';
         }
-        $response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
-        $response->headers->set('Content-Type', 'application/json');
+        //7$response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
+        //$response->headers->set('Content-Type', 'application/json');
+        $response=new Response();
         return $response;
     }
 
