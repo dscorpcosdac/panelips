@@ -312,7 +312,7 @@ class SuricataController extends Controller
                 $contenido = fread($abrir,filesize($archivo));
                 fclose($abrir); 
                 $abrir = fopen($elbueno,'a');
-                fwrite($abrir,$otro);
+                fwrite($abrir,$contenido);
                 fclose($abrir);
                 $ok=false;
                 $resultado=shell_exec('/var/log/suricata.log');
@@ -320,7 +320,7 @@ class SuricataController extends Controller
                 fclose($file);
             }else{
                 $ok=true;
-                $resultado=shell_exec('/var/log/suricata.log');
+                //$resultado=shell_exec('/var/log/suricata.log');
 
             }
 
