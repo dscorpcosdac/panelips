@@ -315,7 +315,7 @@ class SuricataController extends Controller
                 fwrite($abrir,$contenido);
                 fclose($abrir);
                 $ok=false;
-                $resultado=shell_exec('/var/log/suricata.log');
+                $resultado=$contenido;//shell_exec('/var/log/suricata.log');
                 $file = fopen($archivo, "w+");
                 fclose($file);
             }else{
