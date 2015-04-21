@@ -305,21 +305,28 @@ class SuricataController extends Controller
     {
         ini_set('display_errors', -1);
         $resultado=system('sudo check_suricata');
-        $resultado=shell_exec('more /var/www/panelips/web/rules/local.txt');
-        echo "<pre>$resultado</pre>";
-         $em = $this->getDoctrine()->getManager();
-         echo '</br>';echo '</br>';echo '</br>';echo '</br>';echo '</br>';echo '</br>';
-        $entidades=$em->getRepository('AppBundle:Suricata')->mwexec_bg('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
-        echo $entidades;
-        echo '</br>';
-echo '</br>';echo '</br>';echo '</br>';echo '</br>';
-        echo shell_exec('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
-        $pos = strpos($resultado, 'ERRCODE');
-        if ($pos === false) {
-            $ok='true';
-        } else {
-           $ok='false';
-        }
+        $archivo='/var/log/suricata.log';
+        $elbueno='/var/log/nsm/ips-br0/suricata.log';
+        if(filesize($archivo)>0){
+                $abrir = fopen($archivo,'r+');
+                $contenido = fread($abrir,filesize($archivo));
+                fclose($abrir); 
+                $abrir = fopen($elbueno,'a');
+                fwrite($abrir,$otro);
+                fclose($abrir);
+                $ok=false;
+                $resultado=shell_exec('/var/log/suricata.log');
+                $file = fopen($archivo, "w+");
+                fclose($file);
+            }else{
+                $ok=true;
+                $resultado=shell_exec('/var/log/suricata.log');
+
+            }
+
+echo $resultado;
+        
+       
         //7$response = new Response(json_encode(array('funciono'=>$ok,'error'=>$resultado)));
         //$response->headers->set('Content-Type', 'application/json');
         $response=new Response();
