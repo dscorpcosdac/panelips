@@ -444,7 +444,7 @@ $('#bodyPoliza').delegate('.form_transaccion_enable', 'click', function(event) {
           
         });
 
-function chekError(){
+function chekError(option){
      
     $.ajax({
                     type: "POST",
@@ -464,8 +464,9 @@ function chekError(){
                                                    
                            $('#ctnError').html(response.error);
                         }
-
+                        if(option>0){
                             $('#btnPopDanger').click();                           
+                        }
                          
                     },
                     error: function(xhr, ajaxOptions, thrownError) {}
@@ -473,9 +474,10 @@ function chekError(){
 }
 //btnPopDanger
 $('#ctnActions').delegate('#btnPopDanger', 'click', function(event) {  
-chekError();
+    chekError(0);
 })
-chekError();
+chekError(1);
+
  });
 
 
