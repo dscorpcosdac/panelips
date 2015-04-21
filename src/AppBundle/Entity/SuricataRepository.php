@@ -328,16 +328,20 @@ foreach ($rules_map as $k1 => $rulem) {
 								$sid = $this->suricata_get_sid($v['rule']);
 								$dato['id']=$sid;
 								$gid = $this->suricata_get_gid($v['rule']);
+								$laz=$lax=0;
 								foreach ($currentruleset as $key) {
 									$osid = $this->suricata_get_sid($key['rule']);
-									if($sid!=$osid)
+									if($sid==$osid)
 									{
-										//echo $sid.'=='.$osid.'<br>';
-										if($v['disabled']==0){
-											$v['disabled']=1;
-										}
+										$laz++;
+										//$lax=
 									}
 									# code...
+								}
+								if($laz > 0){
+									$v['disabled']=0;
+								}else{
+									$v['disabled']=1;
 								}
 								//echo '<pre>';print_r($rules_map );echo '</pre>'
 								
