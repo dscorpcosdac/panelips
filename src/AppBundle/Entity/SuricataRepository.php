@@ -258,6 +258,24 @@ function suricata_get_flowbits($rule) {
 	return $flowbits;
 }
 
+function mwexec_bg($command, $clearsigmask = false) {
+	global $g;
+
+	if ($g['debug']) {
+		if (!$_SERVER['REMOTE_ADDR'])
+			echo "mwexec(): $command\n";
+	}
+
+	if ($clearsigmask) {
+		$oldset = array();
+		pcntl_sigprocmask(SIG_SETMASK, array(), $oldset);
+	}
+	$_gb = exec("/usr/bin/nohup $command > /dev/null 2>&1 &");
+	if ($clearsigmask) {
+		pcntl_sigprocmask(SIG_SETMASK, $oldset);
+	}
+	unset($_gb);
+}
 function add_title_attribute($tag, $title) {
 
 	/********************************
