@@ -462,7 +462,7 @@ function chekError(option){
                             $('#ctnError').html('Todo bien no existen errores');
                         }else{
                                                    
-                           $('#ctnError').html(response.error);
+                           $('#ctnError').html('<pre>'+response.error+'</pre>');
                         }
                         if(option>0){
                             $('#btnPopDanger').click();                           
