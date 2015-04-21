@@ -204,13 +204,13 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     <form method="POST" action="{{path('rule_edit')}}">
                         <input type="hidden" name="file" value="{{sinnada}}">
                         <input type="hidden" name="rule" value="{{entity.ruleencode}}">
-                          <button type="submit"><i class="fa fa-edit"></i>
+                          <button type="submit"  class="btn" title="Editar Entrada"><i class="fa fa-edit"></i>
                          </button>
                     </form>
                        
                     {% endif %}
                      {% if entity.iconb == 'activo' %}
-                        <a href="javascrip:void(0)" class="btn btn-danger form_rule_disable" entidad="{{entity.ruleencode}}" title="Desactivar Entrada"><i class="fa fa-minus-square-o"></i>
+                        <a href="javascrip:void(0)" class="btn form_rule_disable" entidad="{{entity.ruleencode}}" title="Desactivar Entrada"><i class="fa fa-minus-square-o"></i>
                          </a>
                      {% endif %}
                      {% if entity.iconb == 'pendiente' %}
