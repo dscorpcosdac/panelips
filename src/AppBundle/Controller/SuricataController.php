@@ -307,6 +307,7 @@ class SuricataController extends Controller
         $resultado=system('sudo check_suricata');
         $resultado=shell_exec('more /var/www/panelips/web/rules/local.txt');
         echo "<pre>$resultado</pre>";
+         $em = $this->getDoctrine()->getManager();
         $entidades=$em->getRepository('AppBundle:Suricata')->mwexec_bg('sudo suricata -T -c /etc/nsm/ips-br0/suricata.yaml -i br0');
         echo $entidades;
         $pos = strpos($resultado, 'ERRCODE');
