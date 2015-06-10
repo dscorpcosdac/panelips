@@ -60,15 +60,8 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                     </div>
                     <div class="ibox-content">
                     {{ form_start(form, {'attr': {'class': 'form_transaccion_edit','action':  path('maclist_import')}}) }}
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Accion</label>
-                                <div class="col-sm-10">
-                                    {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
-                                    <span class="help-block m-b-none">{{ form_errors(form.nombre) }}</span>
-                                </div>
-                        </div>
+                  
 
-                        <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Archivo .xls</label>
                                 <div class="col-sm-10">
@@ -102,7 +95,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                                         </div>
                                     </div>
                                     <div class="ibox-content">
-                                          <button class="btn btn-primary dim" type="button" onclick="consola(2)"><i class="fa fa-check" ></i> Aplicar cambios </button>
+                                          <button class="btn btn-primary dim" type="button" onclick="consola(4)"><i class="fa fa-check" ></i> Aplicar cambios </button>
                                          
                                           <a href="{{path('maclist_export')}}" id="hrExport" class="btn btn-primary dim" target="_blank"><i class="fa fa-check" ></i> Exportar xls </a>
                                         
@@ -114,7 +107,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Listado de Macs</h5>
-                          <a href="{{path('maclist_new')}}"  style="margin-left: 70px;" class="btn btn-info btn-circle" title="Agregar producto">
+                          <a href="{{path('maclist_new')}}"  style="margin-left: 70px;" class="btn btn-info btn-circle" title="Agregar equipo">
                                   <i class="fa fa-check"></i>
                              </a>    
                         <div class="ibox-tools">                         
@@ -132,9 +125,7 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
        <table class="table table-striped table-bordered bootstrap-datatable datatable">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
+                <th>Id</th>                
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
                 <th>Actions</th>
@@ -143,13 +134,22 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
         <tbody id="bodyPoliza">
         {% set foo = 1 %}
         {% for entity in entities %}
-        {% if entity|length > 2 %}
             <tr id="ctnTr{{entity.id}}">
-                <td>{{foo}}</td>
-                <td><input type="text" name="txtAction" id="txtAction" value=" {{ entity.0 }}"><span style="display:none">{{ entity.0 }}</span></td>
-                <td>{{ entity.1 }}</td>
-                <td><input type="text" name="txtMac" id="txtMac" value=" {{ entity.3 }}"><span style="display:none">{{ entity.3 }}</span></td>
-                <td><input type="text" name="txtIp" id="txtIp" value=" {{ entity.6 }}"><span style="display:none">{{ entity.6 }}</span></td>
+                <td>{{foo}}</td>              
+                <td>
+                    {% if entity.mac is defined %}
+                        <input type="text" name="txtMac" id="txtMac" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
+                    {% else %}
+                        <input type="text" name="txtMac" id="txtMac" value=""><span style="display:none"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.ip is defined %}
+                        <input type="text" name="txtIp" id="txtIp" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
+                    {% else %}
+                        <input type="text" name="txtIp" id="txtIp" value=""><span style="display:none"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <input type="hidden" name="txtElid" value="{{entity.id}}">
                      <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
@@ -159,15 +159,12 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                
                 </td>
             </tr>
-             {% set foo = foo + 1 %}
-            {% endif %} 
+             {% set foo = foo + 1 %}          
         {% endfor %}
         </tbody>
      <tfoot>
              <tr>
-               <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
+                <th>Id</th>
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
                 <th>Actions</th>
