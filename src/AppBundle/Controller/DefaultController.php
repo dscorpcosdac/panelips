@@ -367,6 +367,43 @@ class DefaultController extends Controller
             return $response;*/
     }
 
+        /**
+     * @Route("/exeption/delete", name="exeption_delete")
+     */
+    public function maclistdeleteAction()
+    {
+        $puntero=$this->get('request')->request->get('cualid', '');
+        //$puntero=$this->get('request')->request->get('txtElid', '');
+        $operaciones=explode('_', $puntero);
+        $res=false;
+         //if($operaciones[0]){ 
+          switch ($operaciones[1]) {
+            case 'ip':$archivo = '/etc/warriorsips/ips_ip'; break;
+            case 'mac':$archivo = '/etc/warriorsips/ips_mac'; break;
+            case 'macip':$archivo = '/etc/warriorsips/ips_mac_ip'; break;
+          }
+        // Separar linea por linea
+        //if($puntero>0){ 
+           // $archivo = '/etc/shorewall/maclist';
+            $abrir = fopen($archivo,'r+');
+            $contenido = fread($abrir,filesize($archivo));
+            fclose($abrir);        
+            $contenido = explode("\n",$contenido);
+            unset($contenido[$operaciones[0]]);
+            $b = array_values($contenido);
+            $otro = implode("\n",$b); 
+            // Guardar Archivo
+            $abrir = fopen($archivo,'w');
+            fwrite($abrir,$otro);
+            fclose($abrir);
+            $res=true;
+        //}
+        return $this->redirect($this->generateUrl('maclist'));
+        /*$response = new Response(json_encode(array('funciono'=>$res)));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;*/
+    }
+
      /**
      * @Route("/maclist/import", name="maclist_import")
      */

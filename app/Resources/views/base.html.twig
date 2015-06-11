@@ -189,6 +189,7 @@
         </div>
         </div>
     </div>
+    <form id="frmDelete" method="POST" action="{{path('maclist_delete')}}"><input type="hidden" name="cualid" id="cualid"></form>
     <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-width="760" style="display: none;">>
         <div class="modal-dialog" style="background: #fff;">         
            <div class="modal-header">
@@ -534,7 +535,7 @@ $('#bodyPolizaesepcion').delegate('.form_esepcion_delete', 'click', function(eve
             event.preventDefault();
             if(confirm("Esta seguro que desea eliminar este elemento!")){
                 document.getElementById('cualid').value=$( this ).attr( "entidad" );
-                $('#frmDelete').submit();
+                $('#exeDelete').submit();
             }
   
           
