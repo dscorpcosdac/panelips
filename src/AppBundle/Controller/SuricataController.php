@@ -342,7 +342,7 @@ class SuricataController extends Controller
         $resultado=shell_exec('ps -af | grep suricata');
         $pid=trim(substr ( $resultado , 8, 25));
 
-        $resultado=shell_exec('sudo kill -USR2 '.$pid);
+        $resultado=shell_exec('sudo kill -USR2 11635');
         //echo $resultado;
         
         //echo $resultado;
