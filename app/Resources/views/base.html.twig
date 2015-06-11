@@ -87,26 +87,7 @@
 
 
                 <div class="row"> 
-                   <div class="col-lg-4">
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-title">
-                                        <h5>Servicios</h5>
-                                        <div class="ibox-tools">
-                                            <a class="collapse-link">
-                                                <i class="fa fa-chevron-up"></i>
-                                            </a>
-                                            <a class="close-link">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="ibox-content">
-                                          <button class="btn btn-primary dim" type="button" onclick="consola(1)"><i class="fa fa-check" ></i> Iniciar </button>
-                                       
-                                         <button class="btn btn-danger dim" type="button" onclick="consola(3)"><i class="fa fa-power-off"></i> Apagar</button>
-                                    </div>
-                                </div>
-                            </div>                 
+                            
                             <div class="col-lg-8">
                                 <div class="ibox float-e-margins">
                                     <div class="ibox-title">
@@ -127,7 +108,7 @@
                 <th>Id</th>               
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
-                
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody id="bodyPoliza" >
@@ -166,14 +147,33 @@
                <th>Id</th>                
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
-                
+                <th>Actions</th>
             </tr>
             </tfoot>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                         
+                         <div class="col-lg-4">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Servicios</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="close-link">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+                                          <button class="btn btn-primary dim" type="button" onclick="consola(1)"><i class="fa fa-check" ></i> Iniciar </button>
+                                       
+                                         <button class="btn btn-danger dim" type="button" onclick="consola(3)"><i class="fa fa-power-off"></i> Apagar</button>
+                                    </div>
+                                </div>
+                            </div>        
                         </div>
                         
                 {% endblock %}
