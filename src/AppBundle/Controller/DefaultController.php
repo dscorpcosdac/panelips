@@ -410,6 +410,7 @@ class DefaultController extends Controller
      */
     public function exeptiondeleteAction()
     {
+      print_r($this->get('request')->request);
         $puntero=$this->get('request')->request->get('cualid', '');
         //$puntero=$this->get('request')->request->get('txtElid', '');
         $operaciones=explode('_', $puntero);
