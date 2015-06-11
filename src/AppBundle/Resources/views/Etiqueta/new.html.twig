@@ -111,7 +111,7 @@ function getMac(valueForm){
 
 $('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {  
        event.preventDefault();
-        var data='&txtElid='+elidtr;
+        //var data='&txtElid='+elidtr;
             var mac=$('#txtMac' + elidtr).val();
             var ip=$('#txtIp' + elidtr).val();
             //$('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
@@ -127,7 +127,7 @@ $('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {
                 }
             }
 
-            if(getip!=''){
+            if(ip!=''){
                 if(!getip(ip)){
                     alert('Direccion ip invalida');
                     return false;
