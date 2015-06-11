@@ -525,7 +525,8 @@ $('#bodyPolizaesepcion').delegate('.form_esepcion_delete', 'click', function(eve
             event.preventDefault();
             if(confirm("Esta seguro que desea eliminar este elemento!")){
                 alert($( this ).attr( "entidad" ));
-                document.getElementById('cualidexe').value=$( this ).attr( "entidad" );
+                $('#cualidexe').val($( this ).attr( "entidad" ));
+                alert($('#cualidexe').val());
                 //$('#exeDelete').submit();
             }
   
