@@ -524,9 +524,9 @@ $('#bodyPolizaesepcion').delegate('.form_esepcion_edit', 'click', function(event
 $('#bodyPolizaesepcion').delegate('.form_esepcion_delete', 'click', function(event) {  
             event.preventDefault();
             if(confirm("Esta seguro que desea eliminar este elemento!")){
-                alert($( this ).attr( "entidad" ));
+             //   alert($( this ).attr( "entidad" ));
                 $('#cualidexe').val($( this ).attr( "entidad" ));
-                alert($('#cualidexe').val());
+               // alert($('#cualidexe').val());
                 //$('#exeDelete').submit();
             }
   
