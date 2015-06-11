@@ -14,23 +14,46 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-         $archivo = '/etc/shorewall/maclist';
+          $contenido='';
+        $archivo = '/etc/maclist/ips_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
-         
-        // Separar linea por linea
+        $contenido = explode("\n",$contenido);
+        //print_r($contenido );
+        for($i=0;$i<count($contenido);$i++){   
+            if($contenido[$i]!=''){         
+                $macsips[]=array('ip'=>$contenido[$i],'id'=>$i.'_ip');
+              }
+        }
+
+        $contenido='';
+        $archivo = '/etc/maclist/ips_mac';
+        $abrir = fopen($archivo,'r+');
+        $contenido = fread($abrir,filesize($archivo));
+        fclose($abrir);
+        $contenido = explode("\n",$contenido);
+       // print_r($contenido );
+        for($i=0;$i<count($contenido);$i++){ 
+              if($contenido[$i]!=''){            
+                $macsips[]=array('mac'=>$contenido[$i],'id'=>$i.'_mac');
+              }
+        }
+
+        $contenido='';
+        $archivo = '/etc/maclist/ips_mac_ip';
+        $abrir = fopen($archivo,'r+');
+        $contenido = fread($abrir,filesize($archivo));
+        fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
             $datos=explode('  ', $contenido[$i]);
-            if(count($datos)>2){
-                $datos['id']=$i;
-                $todo[]=$datos;
+            if(count($datos)>1){
+              $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
-
         }
         return $this->render('default/index.html.twig', array(
-            'entities' => $todo,
+            'entities' => $macsips,
         ));
     }
 

@@ -104,9 +104,7 @@
                                         <table class="table table-hover no-margins">
               <thead>
             <tr>
-                <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
+                <th>Id</th>               
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
                 
@@ -115,24 +113,37 @@
         <tbody id="bodyPoliza">
         {% set foo = 1 %}
         {% for entity in entities %}
-        {% if entity|length > 2 %}
             <tr id="ctnTr{{entity.id}}">
-                <td>{{foo}}</td>
-                <td>{{ entity.0 }}</span></td>
-                <td>{{ entity.1 }}</td>
-                <td>{{ entity.3 }}</td>
-                <td>{{ entity.6 }}</td>
-                
+                <td>{{foo}}</td>              
+                <td>
+                    {% if entity.mac is defined %}
+                        <input type="text" name="txtMac" id="txtMac" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
+                    {% else %}
+                        <input type="text" name="txtMac" id="txtMac" value=""><span style="display:none"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.ip is defined %}
+                        <input type="text" name="txtIp" id="txtIp" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
+                    {% else %}
+                        <input type="text" name="txtIp" id="txtIp" value=""><span style="display:none"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    <input type="hidden" name="txtElid" value="{{entity.id}}">
+                     <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
+                     </button>
+                    <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" data-original-title="Eliminar Entrada"><i class="fa fa-trash-o"></i>
+                     </button>
+               
+                </td>
             </tr>
-             {% set foo = foo + 1 %}
-            {% endif %} 
+             {% set foo = foo + 1 %}          
         {% endfor %}
         </tbody>
      <tfoot>
              <tr>
-               <th>Id</th>
-                <th>DISPOSITION</th>
-                <th>INTERFACE</th>
+               <th>Id</th>                
                 <th>MAC</th>
                 <th>IP ADDRESSES</th>
                 
