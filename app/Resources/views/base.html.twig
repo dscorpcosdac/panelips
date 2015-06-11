@@ -380,7 +380,7 @@ $('.datatable').dataTable({
 $( document ).ready(function() {
 
 function getip(valueForm){
-{
+
    
     // Patron para la ip
     var patronIp=new RegExp("^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})$");
@@ -477,34 +477,9 @@ $('#bodyPoliza').delegate('.form_transaccion_delete', 'click', function(event) {
                 document.getElementById('cualid').value=$( this ).attr( "entidad" );
                 $('#frmDelete').submit();
             }
-    /*       url =  "{{path('maclist_delete')}}";
-           elidtr = $( this ).attr( "entidad" );
-            var data;
-            $.ajax({
-                    type: "POST",
-                    dataType: "Json",
-                    data: "cualid="+elidtr ,
-                    url: url,
-                    beforeSend: function() {
-                       $('#preloader-formulario').show();             
-                    },
-                    success: function(response) {   
-                        $('#preloader-formulario').hide();  
-                        //$( "#bodyPoliza" ).append(response ); 
-                        if(!response.funciono){
-                            alert("ocurrio un error por favor verifica tus datos");
-                        }else{
-                            $('#ctnTr' + elidtr).remove();
-                           // $('hdnIdtran_' + elidtr).remove();
-                        }
-                                                       
-                         
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {}
-                });
-*/
+  
           
-        });
+        })
  });
 function exportar(){
     $('#hrExport').click();
