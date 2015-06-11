@@ -358,7 +358,7 @@ class DefaultController extends Controller
 
         //echo $archivo;
         $file = fopen($archivo, "a");
-        fwrite($file, $contenido );
+        fwrite($file, $contenido . PHP_EOL);
       //  fwrite($file, "Añadimos línea 2" . PHP_EOL);
         fclose($file);
         return $this->redirect($this->generateUrl('maclist'));
@@ -607,7 +607,7 @@ class DefaultController extends Controller
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
-            $datos=explode('  ', $contenido[$i]);
+            $datos=explode(';', $contenido[$i]);
             if(count($datos)>1){
               $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
