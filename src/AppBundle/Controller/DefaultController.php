@@ -60,7 +60,7 @@ class DefaultController extends Controller
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
-            $datos=explode('  ', $contenido[$i]);
+            $datos=explode(';', $contenido[$i]);
             if(count($datos)>1){
               $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
@@ -259,7 +259,7 @@ class DefaultController extends Controller
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
-            $datos=explode('  ', $contenido[$i]);
+            $datos=explode(';', $contenido[$i]);
             if(count($datos)>1){
               $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
@@ -410,7 +410,6 @@ class DefaultController extends Controller
      */
     public function exeptiondeleteAction()
     {
-      print_r($this->get('request')->request);
         $puntero=$this->get('request')->request->get('cualid', '');
         //$puntero=$this->get('request')->request->get('txtElid', '');
         $operaciones=explode('_', $puntero);
@@ -427,7 +426,7 @@ class DefaultController extends Controller
                 $contenido ='';
             }
             fclose($abrir);  
-print_r($operaciones);
+
             $contenido = explode("\n",$contenido);
             print_r($contenido);
             unset($contenido[$operaciones[0]]);
