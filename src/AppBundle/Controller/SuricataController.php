@@ -340,17 +340,17 @@ class SuricataController extends Controller
     {
 
         $resultado=shell_exec('ps -af | grep suricata');
-        echo $resultado;
-        $pid=trim(substr ( $resultado , 8, 12));
-        echo  $pid;
-        $resultado=shell_exec('sudo kill -USR2 11635');
+        //echo $resultado;
+        $pid=trim(substr ( $resultado , 8, 10));
+        //echo  $pid;
+        $resultado=shell_exec('sudo kill -USR2 '.$pid);
         //echo $resultado;
         
         //echo $resultado;
-        $response = new Response(json_encode(array('funciono'=>false)));
+      /*  $response = new Response(json_encode(array('funciono'=>false)));
             $response->headers->set('Content-Type', 'application/json');
-            return $response;
-        //return $this->redirect($this->generateUrl('suricata-homepage'));
+            return $response;*/
+        return $this->redirect($this->generateUrl('suricata-homepage'));
     }
 
     /**
