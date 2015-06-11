@@ -112,8 +112,8 @@ function getMac(valueForm){
 $('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {  
        event.preventDefault();
         //var data='&txtElid='+elidtr;
-            var mac=$('#txtMac' + elidtr).val();
-            var ip=$('#txtIp' + elidtr).val();
+            var mac=$('#txtMac').val();
+            var ip=$('#txtIp').val();
             //$('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
             if(mac=='' && ip==''){
                 alert('Debe llenar un campo al menos');
