@@ -62,7 +62,7 @@ class DefaultController extends Controller
         for($i=0;$i<count($contenido);$i++){
             //$datos=explode('  ', $contenido[$i]);
             if($contenido !=''){
-              $ips_ecep[]=array('ip'=>$contenido,'id'=>$i.'_esep');
+              $ips_ecep[]=array('ip'=>$contenido[$i],'id'=>$i.'_esep');
             }
         }
 
@@ -243,7 +243,7 @@ class DefaultController extends Controller
         for($i=0;$i<count($contenido);$i++){
             //$datos=explode('  ', $contenido[$i]);
             if($contenido !=''){
-              $ips_ecep[]=array('ip'=>$contenido,'id'=>$i.'_esep');
+              $ips_ecep[]=array('ip'=>$contenido[$i],'id'=>$i.'_esep');
             }
         }
         //array_push($todo, $ips, $macs,$macsips);
