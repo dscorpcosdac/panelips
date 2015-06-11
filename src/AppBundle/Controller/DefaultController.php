@@ -428,7 +428,7 @@ class DefaultController extends Controller
             fclose($abrir);  
 
             $contenido = explode("\n",$contenido);
-            print_r($contenido);
+            //print_r($contenido);
             unset($contenido[$operaciones[0]]);
             $b = array_values($contenido);
             $otro = implode("\n",$b); 
@@ -438,10 +438,10 @@ class DefaultController extends Controller
             fclose($abrir);
             $res=true;
         //}
-        //return $this->redirect($this->generateUrl('maclist'));
-       $response = new Response(json_encode(array('funciono'=>$res)));
+        return $this->redirect($this->generateUrl('maclist'));
+       /*$response = new Response(json_encode(array('funciono'=>$res)));
             $response->headers->set('Content-Type', 'application/json');
-            return $response;
+            return $response;*/
     }
 
      /**
