@@ -110,7 +110,30 @@ $('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {
                 }
             }
 
-        $(this).submit();
+           data+='&txtMac='+ mac+'&txtIp='+ ip;
+              //  });
+            $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    data: data ,
+                    url: $(this).attr('action'),
+                    beforeSend: function() {
+                       $('#preloader-formulario').show();             
+                    },
+                    success: function(response) {   
+                        $('#preloader-formulario').hide();  
+                        //$( "#bodyPoliza" ).append(response ); 
+                        if(!response.funciono){
+                            alert("ocurrio un error por favor verifica tus datos");
+                        }else{
+                            alert("el registro se agrego correctamente");
+                        }
+                         
+                        //$('#ctnTr' + elidtr).replaceWith(response.ctnhtml);                                  
+                         
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {}
+                });
 
 });
 
