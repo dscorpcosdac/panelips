@@ -421,7 +421,7 @@ $('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {
            // var $form = $( this );
             url = "{{path('maclist_update')}}";
             elidtr = $( this ).attr( "entidad" );
-            var data=='&txtElid='+elidtr;
+            var data='&txtElid='+elidtr;
             var mac=$('#txtMac' + elidtr).val();
             var ip=$('#txtIp' + elidtr).val();
             //$('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
