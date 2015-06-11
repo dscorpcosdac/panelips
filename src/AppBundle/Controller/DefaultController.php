@@ -17,7 +17,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         //print_r($contenido );
@@ -30,7 +34,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
        // print_r($contenido );
@@ -43,7 +51,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
@@ -56,7 +68,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ecep';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
@@ -199,7 +215,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         //print_r($contenido );
@@ -212,7 +232,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
        // print_r($contenido );
@@ -225,7 +249,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
@@ -237,7 +265,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ecep';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
@@ -349,7 +381,11 @@ class DefaultController extends Controller
         //if($puntero>0){ 
            // $archivo = '/etc/shorewall/maclist';
             $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
+            if(filesize($archivo)>0){
+                $contenido = fread($abrir,filesize($archivo));
+            }else{
+                $contenido ='';
+            }
             fclose($abrir);        
             $contenido = explode("\n",$contenido);
             unset($contenido[$operaciones[0]]);
@@ -382,7 +418,11 @@ class DefaultController extends Controller
         //if($puntero>0){ 
            // $archivo = '/etc/shorewall/maclist';
             $abrir = fopen($archivo,'r+');
-            $contenido = fread($abrir,filesize($archivo));
+            if(filesize($archivo)>0){
+                $contenido = fread($abrir,filesize($archivo));
+            }else{
+                $contenido ='';
+            }
             fclose($abrir);        
             $contenido = explode("\n",$contenido);
             unset($contenido[$operaciones[0]]);
@@ -520,7 +560,11 @@ class DefaultController extends Controller
        $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
        // print_r($contenido );
@@ -533,7 +577,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
        // print_r($contenido );
@@ -546,7 +594,11 @@ class DefaultController extends Controller
         $contenido='';
         $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
-        $contenido = fread($abrir,filesize($archivo));
+        if(filesize($archivo)>0){
+            $contenido = fread($abrir,filesize($archivo));
+        }else{
+            $contenido ='';
+        }
         fclose($abrir);
         $contenido = explode("\n",$contenido);
         for($i=0;$i<count($contenido);$i++){
@@ -656,7 +708,11 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
             if($archivo==$archivoOri){
                   //$archivo = '/etc/shorewall/maclist';
                   $abrir = fopen($archivo,'r+');
-                  $contenido = fread($abrir,filesize($archivo));
+                  if(filesize($archivo)>0){
+                      $contenido = fread($abrir,filesize($archivo));
+                  }else{
+                      $contenido ='';
+                  }
                   fclose($abrir);        
                   $contenido = explode("\n",$contenido);
                   
@@ -670,7 +726,11 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
                   $res=true;
             }else{
                   $abrir = fopen($archivoOri,'r+');
-                  $contenido = fread($abrir,filesize($archivo));
+                  if(filesize($archivo)>0){
+                      $contenido = fread($abrir,filesize($archivo));
+                  }else{
+                      $contenido ='';
+                  }
                   fclose($abrir);        
                   $contenido = explode("\n",$contenido);
                   unset($contenido[$operaciones[0]]);
@@ -714,7 +774,11 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
            
                   //$archivo = '/etc/shorewall/maclist';
                   $abrir = fopen($archivo,'r+');
-                  $contenido = fread($abrir,filesize($archivo));
+                  if(filesize($archivo)>0){
+                      $contenido = fread($abrir,filesize($archivo));
+                  }else{
+                      $contenido ='';
+                  }
                   fclose($abrir);        
                   $contenido = explode("\n",$contenido);
                   
