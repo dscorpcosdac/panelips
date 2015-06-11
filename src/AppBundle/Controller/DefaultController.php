@@ -234,6 +234,18 @@ class DefaultController extends Controller
               $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
         }
+        $contenido='';
+        $archivo = '/etc/warriorsips/ips_ecep';
+        $abrir = fopen($archivo,'r+');
+        $contenido = fread($abrir,filesize($archivo));
+        fclose($abrir);
+        $contenido = explode("\n",$contenido);
+        for($i=0;$i<count($contenido);$i++){
+            //$datos=explode('  ', $contenido[$i]);
+            if($contenido !=''){
+              $ips_ecep[]=array('ip'=>$contenido,'id'=>$i.'_esep');
+            }
+        }
         //array_push($todo, $ips, $macs,$macsips);
         $entity  = new File();
         $form = $this->createFormBuilder($entity)
@@ -246,6 +258,7 @@ class DefaultController extends Controller
         ->getForm();
         return $this->render('AppBundle:Etiqueta:index.html.twig', array(
             'entities' => $macsips,
+            'esepciones' => $ips_ecep,
             'form' => $form->createView(),
         ));
     }
