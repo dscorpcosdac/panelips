@@ -239,9 +239,45 @@
 
     <!-- Sparkline demo data  -->
     <script src="{{ asset('bundles/app/js/demo/sparkline-demo.js')}}"></script>
-    
+     <script>
+
+
+function consola(tipo){
+    switch(tipo) {
+    case 1:url='{{path('startips')}}';
+        break;
+    case 2:url='{{path('restarSh')}}';
+        break;
+    case 3:url='{{path('stopips')}}';
+        break;
+    case 4:url='{{path('applyips')}}';
+        break;
+}
+      jQuery.ajax({
+                        type: "POST",
+                        dataType: "Json",
+                        data:"nose=hola",
+                        url:url ,
+                        beforeSend: function() {
+                           jQuery('#preloader-formulario').show();             
+                        },
+                        success: function(response) {   
+                            jQuery('#preloader-formulario').hide();  
+                            //$( "#bodyPoliza" ).append(response ); 
+                            if(!response.funciono){
+                                alert("ocurrio un error por favor verifica tus datos");
+                            }                        
+                            
+                            document.getElementById('ctnConsola').innerHTML=response.elcont
+                                                                          
+                              jQuery('#myModal2').modal('show'); 
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {}
+                    });
+}
+    </script>
     {% endblock %}
-    {% block js %}
+       {% block js %}
     <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript">
 
@@ -475,45 +511,5 @@ function exportar(){
 }
 </script>
 {% endblock %}
-
-
-    <script>
-
-
-function consola(tipo){
-    switch(tipo) {
-    case 1:url='{{path('startips')}}';
-        break;
-    case 2:url='{{path('restarSh')}}';
-        break;
-    case 3:url='{{path('stopips')}}';
-        break;
-    case 4:url='{{path('applyips')}}';
-        break;
-}
-      jQuery.ajax({
-                        type: "POST",
-                        dataType: "Json",
-                        data:"nose=hola",
-                        url:url ,
-                        beforeSend: function() {
-                           jQuery('#preloader-formulario').show();             
-                        },
-                        success: function(response) {   
-                            jQuery('#preloader-formulario').hide();  
-                            //$( "#bodyPoliza" ).append(response ); 
-                            if(!response.funciono){
-                                alert("ocurrio un error por favor verifica tus datos");
-                            }                        
-                            
-                            document.getElementById('ctnConsola').innerHTML=response.elcont
-                                                                          
-                              jQuery('#myModal2').modal('show'); 
-                        },
-                        error: function(xhr, ajaxOptions, thrownError) {}
-                    });
-}
-    </script>
-    {% endblock %}
 </body>
 </html>
