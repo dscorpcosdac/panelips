@@ -65,6 +65,7 @@ class DefaultController extends Controller
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start 
         $proceder=shell_exec('sudo sh /root/ips-start.sh');
         $pos = strpos($proceder, 'ERROR');
+        $resultado='';
        /* if ($pos === false) {
             $resultado=shell_exec('sudo shorewall start');
             //$result2=shell_exec('sudo /usr/sbin/nsm_sensor_ips-start');
@@ -90,6 +91,7 @@ class DefaultController extends Controller
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
         $proceder=shell_exec('sudo sh /root/ips-stop.sh');
         $pos = strpos($proceder, 'ERROR');
+        $resultado='';
        /* if ($pos === false) {
             $result1=shell_exec('sudo shorewall clear');
             $result2=shell_exec('sudo /usr/sbin/nsm_sensor_ps-stop');
@@ -115,6 +117,7 @@ class DefaultController extends Controller
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
         $proceder=shell_exec('sudo sh /root/ips-applych.sh');
         $pos = strpos($proceder, 'ERROR');
+        $resultado='';
        /* if ($pos === false) {
             $result1=shell_exec('sudo shorewall clear');
             $result2=shell_exec('sudo /usr/sbin/nsm_sensor_ps-stop');
@@ -139,6 +142,7 @@ class DefaultController extends Controller
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
         $proceder=shell_exec('sudo sh /root/ips-restart.sh');
         $pos = strpos($proceder, 'ERROR');
+        $resultado='';
        /* if ($pos === false) {
             $resultado=shell_exec('sudo shorewall restart');
            // $resultado=shell_exec('sudo /usr/sbin/nsm_sensor_ips-restart');
