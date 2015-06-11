@@ -52,8 +52,23 @@ class DefaultController extends Controller
               $macsips[]=array('ip'=>$datos[1],'mac'=>$datos[0],'id'=>$i.'_macip');
             }
         }
+
+        $contenido='';
+        $archivo = '/etc/warriorsips/ips_ecep';
+        $abrir = fopen($archivo,'r+');
+        $contenido = fread($abrir,filesize($archivo));
+        fclose($abrir);
+        $contenido = explode("\n",$contenido);
+        for($i=0;$i<count($contenido);$i++){
+            //$datos=explode('  ', $contenido[$i]);
+            if($contenido !=''){
+              $ips_ecep[]=array('ip'=>$contenido,'id'=>$i.'_esep');
+            }
+        }
+
         return $this->render('default/index.html.twig', array(
             'entities' => $macsips,
+            'esepciones'=>$ips_ecep,
         ));
     }
 
@@ -243,6 +258,14 @@ class DefaultController extends Controller
        return $this->render('AppBundle:Etiqueta:new.html.twig');
     }
 
+         /**
+     * @Route("/exeption/new", name="exeption_new")
+     */
+    public function exeptionnewAction()
+    {
+       return $this->render('AppBundle:Etiqueta:exeption.html.twig');
+    }
+
      /**
      * @Route("/maclist/create", name="maclist_create")
      */
@@ -265,6 +288,25 @@ class DefaultController extends Controller
        if($txtMac!='' && $txtIp!=''){
           $archivo = '/etc/warriorsips/ips_mac_ip';
           $contenido=trim($txtMac)."  ".trim($txtIp)."\n";
+       }
+
+        //echo $archivo;
+        $file = fopen($archivo, "a");
+        fwrite($file, $contenido . PHP_EOL);
+      //  fwrite($file, "Añadimos línea 2" . PHP_EOL);
+        fclose($file);
+        return $this->redirect($this->generateUrl('maclist'));
+    }
+
+     /**
+     * @Route("/exeption/create", name="exeption_create")
+     */
+    public function exeptioncreateAction()
+    {
+       $txtIp=trim($this->get('request')->request->get('txtIp', ''));            
+      if($txtIp!=''){
+          $archivo = '/etc/warriorsips/ips_ecep';
+          $contenido=trim($txtIp)."\n";
        }
 
         //echo $archivo;
@@ -610,5 +652,42 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
             $response->headers->set('Content-Type', 'application/json');
             return $response;
     }
+
+
+     /**
+     * @Route("/exeption/update", name="exeption_update")
+     */
+    public function exeptionupdateAction()
+    {
+        $puntero=$this->get('request')->request->get('txtElid', '');
+        $operaciones=explode('_', $puntero);
+        $res=false;
+        $txtIp=$this->get('request')->request->get('txtIp', '');
+        $archivo = '/etc/warriorsips/ips_mac';
+        $linea=trim($txtIp)."\n";
+           
+                  //$archivo = '/etc/shorewall/maclist';
+                  $abrir = fopen($archivo,'r+');
+                  $contenido = fread($abrir,filesize($archivo));
+                  fclose($abrir);        
+                  $contenido = explode("\n",$contenido);
+                  
+                  $contenido[$operaciones[0]]=trim($linea);
+                 // $b = array_values($contenido);
+                  $otro = implode("\n",$contenido); 
+                  // Guardar Archivo
+                  $abrir = fopen($archivo,'w');
+                  fwrite($abrir,$otro);
+                  fclose($abrir);
+                  $res=true;
+           
+      //  }
+       // return $this->redirect($this->generateUrl('maclist'));
+        
+        $response = new Response(json_encode(array('funciono'=>$res)));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+    }
+
 
 }

@@ -437,7 +437,7 @@ $('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {
                 }
             }
 
-            if(getip!=''){
+            if(ip!=''){
                 if(!getip(ip)){
                     alert('Direccion ip invalida');
                     return false;
@@ -472,6 +472,65 @@ $('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {
           
         });
 $('#bodyPoliza').delegate('.form_transaccion_delete', 'click', function(event) {  
+            event.preventDefault();
+            if(confirm("Esta seguro que desea eliminar este elemento!")){
+                document.getElementById('cualid').value=$( this ).attr( "entidad" );
+                $('#frmDelete').submit();
+            }
+  
+          
+        })
+
+
+$('#bodyPolizaesepcion').delegate('.form_esepcion_edit', 'click', function(event) {  
+            event.preventDefault();
+           // var $form = $( this );
+            url = "{{path('exeption_update')}}";
+            elidtr = $( this ).attr( "entidad" );
+            var data='&txtElid='+elidtr;
+            var ip=$('#txtIp' + elidtr).val();
+            //$('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
+            if(ip==''){
+                alert('Debe llenar un campo al menos');
+                return false;
+            }
+
+            
+            if(ip!=''){
+                if(!getip(ip)){
+                    alert('Direccion ip invalida');
+                    return false;
+                }
+            }
+
+            data+='&txtMac='+ mac+'&txtIp='+ ip;
+              //  });
+            $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    data: data ,
+                    url: url,
+                    beforeSend: function() {
+                       $('#preloader-formulario').show();             
+                    },
+                    success: function(response) {   
+                        $('#preloader-formulario').hide();  
+                        //$( "#bodyPoliza" ).append(response ); 
+                        if(!response.funciono){
+                            alert("ocurrio un error por favor verifica tus datos");
+                        }else{
+                            alert("el registro se modifico correctamente");
+                        }
+                         
+                        //$('#ctnTr' + elidtr).replaceWith(response.ctnhtml);                                  
+                         
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {}
+                });
+
+          
+        });
+$('#bodyPolizaesepcion').delegate('.form_esepcion_delete', 'click', function(event) {  
             event.preventDefault();
             if(confirm("Esta seguro que desea eliminar este elemento!")){
                 document.getElementById('cualid').value=$( this ).attr( "entidad" );
