@@ -14,6 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+      $macsips=array();
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
@@ -212,6 +213,7 @@ class DefaultController extends Controller
         }
         fclose($file);
        */
+        $macsips=array();
         $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
@@ -560,6 +562,7 @@ class DefaultController extends Controller
        $contenido='';
         $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
+        $macsips=array();
         if(filesize($archivo)>0){
             $contenido = fread($abrir,filesize($archivo));
         }else{
