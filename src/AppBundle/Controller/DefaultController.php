@@ -14,8 +14,8 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-          $contenido='';
-        $archivo = '/etc/maclist/ips_ip';
+        $contenido='';
+        $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -28,7 +28,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac';
+        $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -41,7 +41,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac_ip';
+        $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -63,7 +63,7 @@ class DefaultController extends Controller
     public function startAction()
     {
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start 
-        $proceder=shell_exec('sudo sh /root/ips-start.sh');
+        $proceder=shell_exec('sudo sh /etc/warriorsips/ips-start.sh');
         $pos = strpos($proceder, 'ERROR');
         $resultado='';
        /* if ($pos === false) {
@@ -89,7 +89,7 @@ class DefaultController extends Controller
     public function stopAction()
     {
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
-        $proceder=shell_exec('sudo sh /root/ips-stop.sh');
+        $proceder=shell_exec('sudo sh /etc/warriorsips/ips-stop.sh');
         $pos = strpos($proceder, 'ERROR');
         $resultado='';
        /* if ($pos === false) {
@@ -115,7 +115,7 @@ class DefaultController extends Controller
     public function applyipsAction()
     {
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
-        $proceder=shell_exec('sudo sh /root/ips-applych.sh');
+        $proceder=shell_exec('sudo sh /etc/warriorsips/ips-applych.sh');
         $pos = strpos($proceder, 'ERROR');
         $resultado='';
        /* if ($pos === false) {
@@ -140,7 +140,7 @@ class DefaultController extends Controller
     public function restarshAction()
     {
         //$resultado=shell_exec('shorewall start');//echo  "hola" | sudo shorewall start
-        $proceder=shell_exec('sudo sh /root/ips-restart.sh');
+        $proceder=shell_exec('sudo sh /etc/warriorsips/ips-restart.sh');
         $pos = strpos($proceder, 'ERROR');
         $resultado='';
        /* if ($pos === false) {
@@ -182,7 +182,7 @@ class DefaultController extends Controller
         fclose($file);
        */
         $contenido='';
-        $archivo = '/etc/maclist/ips_ip';
+        $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -195,7 +195,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac';
+        $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -208,7 +208,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac_ip';
+        $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -253,17 +253,17 @@ class DefaultController extends Controller
        $txtIp=trim($this->get('request')->request->get('txtIp', ''));            
        //$contenido=trim($txtAction)."  ".trim($txtInterface)."     ".trim($txtMac)."       ".trim($txtIp)."\n";
        if($txtMac!='' && $txtIp==''){
-          $archivo = '/etc/maclist/ips_mac';
+          $archivo = '/etc/warriorsips/ips_mac';
           $contenido=trim($txtMac)."\n";
        }
 
        if($txtMac=='' && $txtIp!=''){
-          $archivo = '/etc/maclist/ips_ip';
+          $archivo = '/etc/warriorsips/ips_ip';
           $contenido=trim($txtIp)."\n";
        }
 
        if($txtMac!='' && $txtIp!=''){
-          $archivo = '/etc/maclist/ips_mac_ip';
+          $archivo = '/etc/warriorsips/ips_mac_ip';
           $contenido=trim($txtMac)."  ".trim($txtIp)."\n";
        }
 
@@ -286,9 +286,9 @@ class DefaultController extends Controller
         $res=false;
          //if($operaciones[0]){ 
           switch ($operaciones[1]) {
-            case 'ip':$archivo = '/etc/maclist/ips_ip'; break;
-            case 'mac':$archivo = '/etc/maclist/ips_mac'; break;
-            case 'macip':$archivo = '/etc/maclist/ips_mac_ip'; break;
+            case 'ip':$archivo = '/etc/warriorsips/ips_ip'; break;
+            case 'mac':$archivo = '/etc/warriorsips/ips_mac'; break;
+            case 'macip':$archivo = '/etc/warriorsips/ips_mac_ip'; break;
           }
         // Separar linea por linea
         //if($puntero>0){ 
@@ -400,17 +400,17 @@ class DefaultController extends Controller
             $txtIp = implode("\n",$contenidoIp);
             $txtTodo = implode("\n",$contenidoTodo);  
 
-            $archivo = '/etc/maclist/ips_mac';
+            $archivo = '/etc/warriorsips/ips_mac';
             $abrir = fopen($archivo,'w');
             fwrite($abrir,$txtMac);
             fclose($abrir);   
 
-            $archivo = '/etc/maclist/ips_ip';
+            $archivo = '/etc/warriorsips/ips_ip';
             $abrir = fopen($archivo,'w');
             fwrite($abrir,$txtIp);
             fclose($abrir);
 
-            $archivo = '/etc/maclist/ips_mac_ip';
+            $archivo = '/etc/warriorsips/ips_mac_ip';
             $abrir = fopen($archivo,'w');
             fwrite($abrir,$txtTodo);
             fclose($abrir);   
@@ -430,7 +430,7 @@ class DefaultController extends Controller
     public function maclistexportAction()
     {       
        $contenido='';
-        $archivo = '/etc/maclist/ips_ip';
+        $archivo = '/etc/warriorsips/ips_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -443,7 +443,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac';
+        $archivo = '/etc/warriorsips/ips_mac';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -456,7 +456,7 @@ class DefaultController extends Controller
         }
 
         $contenido='';
-        $archivo = '/etc/maclist/ips_mac_ip';
+        $archivo = '/etc/warriorsips/ips_mac_ip';
         $abrir = fopen($archivo,'r+');
         $contenido = fread($abrir,filesize($archivo));
         fclose($abrir);
@@ -546,22 +546,22 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
         $txtIp=$this->get('request')->request->get('txtIp', '');
         //if($operaciones[0]){ 
           switch ($operaciones[1]) {
-            case 'ip':$archivoOri = '/etc/maclist/ips_ip'; break;
-            case 'mac':$archivoOri = '/etc/maclist/ips_mac'; break;
-            case 'macip':$archivoOri = '/etc/maclist/ips_mac_ip'; break;
+            case 'ip':$archivoOri = '/etc/warriorsips/ips_ip'; break;
+            case 'mac':$archivoOri = '/etc/warriorsips/ips_mac'; break;
+            case 'macip':$archivoOri = '/etc/warriorsips/ips_mac_ip'; break;
           }
               if($txtMac!='' && $txtIp==''){
-                  $archivo = '/etc/maclist/ips_mac';
+                  $archivo = '/etc/warriorsips/ips_mac';
                   $linea=trim($txtMac)."\n";
                }
 
                if($txtMac=='' && $txtIp!=''){
-                  $archivo = '/etc/maclist/ips_ip';
+                  $archivo = '/etc/warriorsips/ips_ip';
                   $linea=trim($txtIp)."\n";
                }
 
                if($txtMac!='' && $txtIp!=''){
-                  $archivo = '/etc/maclist/ips_mac_ip';
+                  $archivo = '/etc/warriorsips/ips_mac_ip';
                   $linea=trim($txtMac)."  ".trim($txtIp)."\n";
                }
 

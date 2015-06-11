@@ -138,20 +138,20 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
                 <td>{{foo}}</td>              
                 <td>
                     {% if entity.mac is defined %}
-                        <input type="text" name="txtMac" id="txtMac" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
+                        <input type="text" name="txtMac" id="txtMac{{entity.id}}" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
                     {% else %}
-                        <input type="text" name="txtMac" id="txtMac" value=""><span style="display:none"></span>
+                        <input type="text" name="txtMac" id="txtMac{{entity.id}}" value=""><span style="display:none"></span>
                     {% endif %}
                 </td>
                 <td>
                     {% if entity.ip is defined %}
-                        <input type="text" name="txtIp" id="txtIp" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
+                        <input type="text" name="txtIp" id="txtIp{{entity.id}}" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
                     {% else %}
-                        <input type="text" name="txtIp" id="txtIp" value=""><span style="display:none"></span>
+                        <input type="text" name="txtIp" id="txtIp{{entity.id}}" value=""><span style="display:none"></span>
                     {% endif %}
                 </td>
                 <td>
-                    <input type="hidden" name="txtElid" value="{{entity.id}}">
+                    <input type="hidden" name="txtElid" id="txtElid{{entity.id}}"  value="{{entity.id}}">
                      <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
                      </button>
                     <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" data-original-title="Eliminar Entrada"><i class="fa fa-trash-o"></i>
@@ -178,178 +178,4 @@ box-shadow: inset 0px 0px 0px #16987e, 0px 5px 0px 0px #16987e, 0px 10px 5px #99
             </div>
 
         <form id="frmDelete" method="POST" action="{{path('maclist_delete')}}"><input type="hidden" name="cualid" id="cualid"></form>
-    {% endblock %}    {% block js %}
-    <script src="{{ asset('bundles/app/js/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript">
 
-
-/* ---------- Additional functions for data table ---------- */
-$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
-{
-    return {
-        "iStart":         oSettings._iDisplayStart,
-        "iEnd":           oSettings.fnDisplayEnd(),
-        "iLength":        oSettings._iDisplayLength,
-        "iTotal":         oSettings.fnRecordsTotal(),
-        "iFilteredTotal": oSettings.fnRecordsDisplay(),
-        "iPage":          Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
-        "iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
-    };
-}
-$.extend( $.fn.dataTableExt.oPagination, {
-    "bootstrap": {
-        "fnInit": function( oSettings, nPaging, fnDraw ) {
-            var oLang = oSettings.oLanguage.oPaginate;
-            var fnClickHandler = function ( e ) {
-                e.preventDefault();
-                if ( oSettings.oApi._fnPageChange(oSettings, e.data.action) ) {
-                    fnDraw( oSettings );
-                }
-            };
-
-            $(nPaging).addClass('pagination').append(
-                '<ul class="pagination">'+
-                    '<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
-                    '<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
-                '</ul>'
-            );
-            var els = $('a', nPaging);
-            $(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
-            $(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
-        },
-
-        "fnUpdate": function ( oSettings, fnDraw ) {
-            var iListLength = 5;
-            var oPaging = oSettings.oInstance.fnPagingInfo();
-            var an = oSettings.aanFeatures.p;
-            var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
-
-            if ( oPaging.iTotalPages < iListLength) {
-                iStart = 1;
-                iEnd = oPaging.iTotalPages;
-            }
-            else if ( oPaging.iPage <= iHalf ) {
-                iStart = 1;
-                iEnd = iListLength;
-            } else if ( oPaging.iPage >= (oPaging.iTotalPages-iHalf) ) {
-                iStart = oPaging.iTotalPages - iListLength + 1;
-                iEnd = oPaging.iTotalPages;
-            } else {
-                iStart = oPaging.iPage - iHalf + 1;
-                iEnd = iStart + iListLength - 1;
-            }
-
-            for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
-                // remove the middle elements
-                $('li:gt(0)', an[i]).filter(':not(:last)').remove();
-
-                // add the new list items and their event handlers
-                for ( j=iStart ; j<=iEnd ; j++ ) {
-                    sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
-                    $('<li '+sClass+'><a href="#">'+j+'</a></li>')
-                        .insertBefore( $('li:last', an[i])[0] )
-                        .bind('click', function (e) {
-                            e.preventDefault();
-                            oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
-                            fnDraw( oSettings );
-                        } );
-                }
-
-                // add / remove disabled classes from the static elements
-                if ( oPaging.iPage === 0 ) {
-                    $('li:first', an[i]).addClass('disabled');
-                } else {
-                    $('li:first', an[i]).removeClass('disabled');
-                }
-
-                if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
-                    $('li:last', an[i]).addClass('disabled');
-                } else {
-                    $('li:last', an[i]).removeClass('disabled');
-                }
-            }
-        }
-    }
-});
-$('.datatable').dataTable({
-            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
-            "sPaginationType": "bootstrap",
-            "oLanguage": {
-            "sLengthMenu": "_MENU_ records per page"
-            }
-        } );
-$( document ).ready(function() {
-$('#bodyPoliza').delegate('.form_transaccion_edit', 'click', function(event) {  
-            event.preventDefault();
-           // var $form = $( this );
-            url = "{{path('maclist_update')}}";
-            elidtr = $( this ).attr( "entidad" );
-            var data;
-            $('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
-                   data+='&'+ $(this).attr('name')+'='+ $(this).val();
-                });
-            $.ajax({
-                    type: "POST",
-                    dataType: "Json",
-                    data: data ,
-                    url: url,
-                    beforeSend: function() {
-                       $('#preloader-formulario').show();             
-                    },
-                    success: function(response) {   
-                        $('#preloader-formulario').hide();  
-                        //$( "#bodyPoliza" ).append(response ); 
-                        if(!response.funciono){
-                            alert("ocurrio un error por favor verifica tus datos");
-                        }else{
-                            alert("el registro se modifico correctamente");
-                        }
-                         
-                        //$('#ctnTr' + elidtr).replaceWith(response.ctnhtml);                                  
-                         
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {}
-                });
-
-          
-        });
-$('#bodyPoliza').delegate('.form_transaccion_delete', 'click', function(event) {  
-            event.preventDefault();
-            if(confirm("Esta seguro que desea eliminar este elemento!")){
-                document.getElementById('cualid').value=$( this ).attr( "entidad" );
-                $('#frmDelete').submit();
-            }
-    /*       url =  "{{path('maclist_delete')}}";
-           elidtr = $( this ).attr( "entidad" );
-            var data;
-            $.ajax({
-                    type: "POST",
-                    dataType: "Json",
-                    data: "cualid="+elidtr ,
-                    url: url,
-                    beforeSend: function() {
-                       $('#preloader-formulario').show();             
-                    },
-                    success: function(response) {   
-                        $('#preloader-formulario').hide();  
-                        //$( "#bodyPoliza" ).append(response ); 
-                        if(!response.funciono){
-                            alert("ocurrio un error por favor verifica tus datos");
-                        }else{
-                            $('#ctnTr' + elidtr).remove();
-                           // $('hdnIdtran_' + elidtr).remove();
-                        }
-                                                       
-                         
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {}
-                });
-*/
-          
-        });
- });
-function exportar(){
-    $('#hrExport').click();
-}
-</script>
-{% endblock %}
