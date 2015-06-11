@@ -306,7 +306,7 @@ class SuricataController extends Controller
         //ini_set('display_errors', -1);
         $resultado=shell_exec('sudo check_suricata');
         $archivo='/var/log/suricata.log';
-        $elbueno='/var/log/nsm/ips-br0/suricata.log';
+        $elbueno='/var/log/nsm/ipscardio-br0/suricata.log';
         if(filesize($archivo)>0){
                 $abrir = fopen($archivo,'r+');
                 $contenido = fread($abrir,filesize($archivo));
@@ -338,7 +338,11 @@ class SuricataController extends Controller
      */
     public function restartSuricataAction()
     {
-        $resultado=shell_exec('sudo kill -USR2 10238');
+
+        $resultado=shell_exec('ps -af | grep suricata');
+        $pid=trim(substr ( $resultado , 8, 25));
+
+        $resultado=shell_exec('sudo kill -USR2 '.$pid);
         //echo $resultado;
         
         //echo $resultado;
@@ -350,7 +354,7 @@ class SuricataController extends Controller
      */
     public function ruleActiveMsAction()
     {
-        ini_set('display_erros', -1);
+        //ini_set('display_erros', -1);
         //echo __DIR__.'/../../../web/rules/enabled.txt';
         $em = $this->getDoctrine()->getManager();   
         $rules=$this->get('request')->request->get('archivo', '');
