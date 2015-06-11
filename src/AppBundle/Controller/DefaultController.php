@@ -339,7 +339,7 @@ class DefaultController extends Controller
 
         //echo $archivo;
         $file = fopen($archivo, "a");
-        fwrite($file, $contenido . PHP_EOL);
+        fwrite($file, $contenido);
       //  fwrite($file, "Añadimos línea 2" . PHP_EOL);
         fclose($file);
         return $this->redirect($this->generateUrl('maclist'));
