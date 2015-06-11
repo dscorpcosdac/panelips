@@ -370,18 +370,14 @@ class DefaultController extends Controller
         /**
      * @Route("/exeption/delete", name="exeption_delete")
      */
-    public function maclistdeleteAction()
+    public function exeptiondeleteAction()
     {
         $puntero=$this->get('request')->request->get('cualid', '');
         //$puntero=$this->get('request')->request->get('txtElid', '');
         $operaciones=explode('_', $puntero);
         $res=false;
          //if($operaciones[0]){ 
-          switch ($operaciones[1]) {
-            case 'ip':$archivo = '/etc/warriorsips/ips_ip'; break;
-            case 'mac':$archivo = '/etc/warriorsips/ips_mac'; break;
-            case 'macip':$archivo = '/etc/warriorsips/ips_mac_ip'; break;
-          }
+         $archivo = '/etc/warriorsips/ips_ecep'; 
         // Separar linea por linea
         //if($puntero>0){ 
            // $archivo = '/etc/shorewall/maclist';
@@ -713,7 +709,7 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
         $operaciones=explode('_', $puntero);
         $res=false;
         $txtIp=$this->get('request')->request->get('txtIp', '');
-        $archivo = '/etc/warriorsips/ips_mac';
+        $archivo = '/etc/warriorsips/ips_ecep';
         $linea=trim($txtIp)."\n";
            
                   //$archivo = '/etc/shorewall/maclist';
