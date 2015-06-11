@@ -334,7 +334,7 @@ class DefaultController extends Controller
 
        if($txtMac!='' && $txtIp!=''){
           $archivo = '/etc/warriorsips/ips_mac_ip';
-          $contenido=trim($txtMac)."  ".trim($txtIp)."\n";
+          $contenido=trim($txtMac).";".trim($txtIp)."\n";
        }
 
         //echo $archivo;
@@ -426,7 +426,7 @@ class DefaultController extends Controller
                 $contenido ='';
             }
             fclose($abrir);  
-
+print_r($operaciones);
             $contenido = explode("\n",$contenido);
             print_r($contenido);
             unset($contenido[$operaciones[0]]);
@@ -497,7 +497,7 @@ class DefaultController extends Controller
                }
 
                if($txtMac!='' && $txtIp!=''){
-                  $contenidoTodo[]=trim($txtMac)."  ".trim($txtIp)."\n";
+                  $contenidoTodo[]=trim($txtMac).";".trim($txtIp)."\n";
                }
             }
           /* switch ($entity->getNombre()) {
@@ -707,7 +707,7 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
 
                if($txtMac!='' && $txtIp!=''){
                   $archivo = '/etc/warriorsips/ips_mac_ip';
-                  $linea=trim($txtMac)."  ".trim($txtIp)."\n";
+                  $linea=trim($txtMac).";".trim($txtIp)."\n";
                }
 
             if($archivo==$archivoOri){
@@ -747,7 +747,7 @@ header( "Content-disposition: filename=".$nombre.".csv"); */
                   fclose($abrir);
 
                    $file = fopen($archivo, "a");
-                   fwrite($file, $linea . PHP_EOL);
+                   fwrite($file, $linea);
                   //  fwrite($file, "Añadimos línea 2" . PHP_EOL);
                    fclose($file);
 
