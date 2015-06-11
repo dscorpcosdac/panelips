@@ -343,7 +343,8 @@ class SuricataController extends Controller
         //echo $resultado;
         $pid=trim(substr ( $resultado , 8, 10));
         //echo  $pid;
-        $resultado=shell_exec('sudo kill -USR2 '.$pid);
+        $eje='sudo kill -USR2 '.$pid;
+        $resultado=shell_exec($eje);
         //echo $resultado;
         
         //echo $resultado;
