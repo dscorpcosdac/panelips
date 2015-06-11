@@ -57,7 +57,7 @@
                         </div>
 	                    <div class="hr-line-dashed"></div>
 	                    <a href="{{ path('maclist') }}" class="btn btn-w-m btn-warning"><i class="fa fa-warning"></i> Cancelar</a>
-		      			<button type="submit" class="btn btn-primary" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Guardar</button>
+		      			<button type="submit" class="btn btn-primary" id="btnEnviar" data-original-title="Guardar transaccion"><i class="fa fa-plus-square"></i> Guardar</button>
    					</form>
     			   
 			</div>
@@ -98,9 +98,9 @@ function getMac(valueForm){
 }
 
 
-$('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {  
+$('.ibox-content').delegate('#btnEnviar', 'click', function(event) {  
        event.preventDefault();
-        var data='';
+        //var data='&txtElid='+elidtr;
             var mac=$('#txtMac').val();
             var ip=$('#txtIp').val();
             //$('#ctnTr' + elidtr).find('input:text, select,input:hidden').each(function() {
@@ -123,30 +123,7 @@ $('.ibox-content').delegate('#frmNuevo', 'submit', function(event) {
                 }
             }
 
-        data+='&txtMac='+ mac+'&txtIp='+ ip;
-              //  });
-            $.ajax({
-                    type: "POST",
-                    dataType: "Json",
-                    data: data ,
-                    url: $(this).attr('action'),
-                    beforeSend: function() {
-                       $('#preloader-formulario').show();             
-                    },
-                    success: function(response) {   
-                        $('#preloader-formulario').hide();  
-                        //$( "#bodyPoliza" ).append(response ); 
-                        if(!response.funciono){
-                            alert("ocurrio un error por favor verifica tus datos");
-                        }else{
-                            alert("el registro se agrego correctamente");
-                        }
-                         
-                        //$('#ctnTr' + elidtr).replaceWith(response.ctnhtml);                                  
-                         
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {}
-                });
+        $("#frmNuevo").submit();
 
 });
 
