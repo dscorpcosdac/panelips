@@ -116,22 +116,22 @@
         {% for entity in entities %}
             <tr id="ctnTr{{entity.id}}">
                 <td>{{foo}}</td>              
-                <td>
+               <td>
                     {% if entity.mac is defined %}
-                        <input type="text" name="txtMac" id="txtMac" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
+                        <input type="text" name="txtMac" id="txtMac{{entity.id}}" value="{{ entity.mac }}"><span style="display:none">{{ entity.mac }}</span>
                     {% else %}
-                        <input type="text" name="txtMac" id="txtMac" value=""><span style="display:none"></span>
+                        <input type="text" name="txtMac" id="txtMac{{entity.id}}" value=""><span style="display:none"></span>
                     {% endif %}
                 </td>
                 <td>
                     {% if entity.ip is defined %}
-                        <input type="text" name="txtIp" id="txtIp" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
+                        <input type="text" name="txtIp" id="txtIp{{entity.id}}" value="{{ entity.ip }}"><span style="display:none">{{ entity.ip }}</span>
                     {% else %}
-                        <input type="text" name="txtIp" id="txtIp" value=""><span style="display:none"></span>
+                        <input type="text" name="txtIp" id="txtIp{{entity.id}}" value=""><span style="display:none"></span>
                     {% endif %}
                 </td>
                 <td>
-                    <input type="hidden" name="txtElid" value="{{entity.id}}">
+                    <input type="hidden" name="txtElid" id="txtElid{{entity.id}}"  value="{{entity.id}}">
                      <button type="submit" class="btn btn-info form_transaccion_edit" entidad="{{entity.id}}" data-original-title="Modificar Entrada"><i class="fa fa-refresh"></i>
                      </button>
                     <button type="submit" class="btn btn-danger form_transaccion_delete" entidad="{{entity.id}}" data-original-title="Eliminar Entrada"><i class="fa fa-trash-o"></i>
